@@ -23,6 +23,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        // Propablemente aqui se registra el algoritmo genetico
     }
 }
