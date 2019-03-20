@@ -27,4 +27,22 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /**
+    * Relation between a user and appliances
+    *
+    */
+    public function appliances()
+    {
+        return $this->hasMany(Appliance::class, 'owner_id');
+    }
+
+    /**
+    * Relation between a user and his schedules
+    *
+    */
+    public function schedules()
+    {
+        return $this->hasMany(Schedule::class, 'owner_id');
+    }
 }
