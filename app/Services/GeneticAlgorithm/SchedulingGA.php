@@ -5,6 +5,8 @@ namespace App\Services\GeneticAlgorithm;
 use App\Events\ScheduleGenerated;
 use App\Schedule as ScheduleModel;
 use App\Appliance as ApplianceModel;
+use Carbon\Carbon;
+use App\Prcu;
 
 class SchedulingGA
 {
@@ -21,17 +23,60 @@ class SchedulingGA
     }
 
     /**
+    * Get the timeslot for the current time of the day
+    *
+    */
+    public function getCurrentTimeslot()
+    {
+        $hour = Carbon::now()->hour;
+        $minute = Carbon::now()->minute;
+        $timeslot = (int)ceil(($hour * 60 + $minute) / 12);
+
+        $timeslot = 120; //this variable has to be removed
+
+        return $timeslot;
+    }
+
+    /**
+    * Get the cost of energy from DB for today Prcu
+    *
+    */
+    public function getEnergyCost()
+    {
+        $energyCost = [];
+        $m = 0;
+        $day = Carbon::now()->format('Y-m-d');
+        $costs = Prcu::select('1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24')
+                        ->where('date', $day)->get();
+                        
+        // Generate a vector with 120 values 
+        for ($i=1; $i < 25; $i++) { 
+            $hourlyCost = $costs[0][$i];
+            for ($j=1; $j < 6; $j++) { 
+                $energyCost[$m] = $hourlyCost;
+                $m++;
+            }
+        }
+        return $energyCost;
+    }
+
+    /**
     * Initialize the LOCAL $schedule with all the information needed
     *
     */
     public function initializeSchedule()
     {
-        $timeSlots = 120;
+        $timeSlots = $this->getCurrentTimeslot();
         $schedule = new Schedule($timeSlots);
-        $appliances = ApplianceModel::select('id')->where('status', '0')->get();
+
+        $appliances = ApplianceModel::where('status', '0')->get();
+        $schedule->setAppliances($appliances);
+        
         $appliancesCount = count($appliances);
-        // $appliancesCount = 10;
         $schedule->setAppliancesCount($appliancesCount);
+
+        $energyCost = $this->getEnergyCost();
+        $schedule->setEnergyCost($energyCost);
 
         return $schedule;
     }
@@ -43,18 +88,16 @@ class SchedulingGA
     */
     public function run()
     {
-        $maxGenerations = 500;
+        $maxGenerations = 1000;
 
         $schedule = $this->initializeSchedule();
 
-        $chromosomeLength = 16;
         // GeneticAlgorithm(PopulationSize, Mutation, Crossover, Elites, Torneo)
         $algorithm = new GeneticAlgorithm(100, 0.02, 0.9, 2, 10);
+
         $population = $algorithm->initPopulation($schedule->getAppliancesCount());
-        $algorithm->evaluatePopulation($population);
-        
-        // dump($population);
-        // $population = $algorithm->crossoverPopulation($population);
+
+        $algorithm->evaluatePopulation($population, $schedule);
     
         $generation = 1;
 
@@ -80,7 +123,7 @@ class SchedulingGA
             $population = $algorithm->mutatePopulation($population);
     
             // Evaluate Population
-            $algorithm->evaluatePopulation($population);
+            $algorithm->evaluatePopulation($population, $schedule);
 
             // Prepare termination condition
             $fitness = $population->getFittest(0)->getFitness();
@@ -106,7 +149,7 @@ class SchedulingGA
         //     'status' => 'COMPLETED'
         // ]);
         // event(new ScheduleGenerated($optimalSolution));
+
         dump($optimalSolution);
-        dump($schedule->getAppliancesCount());
     }
 }

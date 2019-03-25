@@ -34,9 +34,6 @@ class Individual
             $newChromosome = [];
         }
         
-
-        // $chromosomeIndex = 0;
-        
         $this->chromosome = $newChromosome;
     }
 

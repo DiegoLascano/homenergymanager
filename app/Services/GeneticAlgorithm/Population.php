@@ -47,7 +47,6 @@ class Population
      */
     public static function random($populationSize, $chromosomeLength)
     {
-        // $population = new Population();
         $population = new Population();
         
         for ($i = 0; $i < $populationSize; $i++) {

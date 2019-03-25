@@ -103,12 +103,76 @@ class GeneticAlgorithm
     * @param OST $ost Operation start time vector
     * @return double The fitness of the individual
     */
-    public function calculateFitness($individual)
+    public function calculateFitness($individual, $schedule)
     {
-        $fitness = 0;
-        foreach ($individual->getChromosome() as $OSTvalue) {
-            $fitness += $OSTvalue;
+        // Variable initialization
+        $pscd = array_fill(0, $schedule->getTimeslots(), 0);
+        $sumEnergia = array_fill(0, $schedule->getTimeslots(), 0);
+        $denCost = array_fill(0, $schedule->getTimeslots(), 0);
+        $score = array_fill(0, 2, 0);
+        $p = 5; //variable para la sumatoria DTR
+        $cu = 0.4; //thresshold of electrical energy consumed
+        $lambda = 1.4423;
+        $weightEnergyCost = 0.5; //weight for the energy cost
+        $weightDTR = 1- $weightEnergyCost; //weight for the DTR (delay time rate)
+        $i = 0;
+        
+        //Evaluate each appliance
+        foreach ($schedule->getAppliances() as $appliance) {
+            $alpha = $appliance->start_oti;
+            $beta = $appliance->finish_oti;
+            $la = $appliance->length_operation;
+
+            $start = $individual->getChromosome()[$i];
+            $finish = $start + $la - 1;
+
+            // This section is for the DTR summation
+            if (($start > $alpha) && ($finish < $beta)) {
+                $DTR = ($start - $alpha) / ($beta - $la - $alpha);
+                $sumDTR[$i] = pow($p, $DTR);
+            }else{
+                $score[0] += 1; 
+                $sumDTR[$i] = 5;
+            }
+            
+            // Constraint verification
+            if ($finish > $schedule->getTimeslots()) {
+                $score[1] += 2; 
+            }
+
+            // Matriz de consumo
+            $consumptionMatrix[$i] = array_fill(0, $schedule->getTimeslots(), 0);
+            for ($j = $start; $j < $finish; $j++) { 
+                $consumptionMatrix[$i][$j] = $appliance->power_kWh / ($schedule->getTimeslots() / 24);
+            }
+            $i++;
         }
+
+        // Max consumption vector for each appliance within a single timeslot
+        for ($m = 1; $m < $schedule->getAppliancesCount(); $m++) { 
+            $maxConsumption[$m] = $schedule->getEnergyCost()[$m] / ($schedule->getTimeslots() / 24);
+        }
+
+        // Summation for the cost of energy
+        for ($n = 0; $n < $schedule->getTimeslots(); $n++) { 
+            for ($count=0; $count < $schedule->getAppliancesCount(); $count++) { 
+                $pscd[$n] =  $pscd[$n] + $consumptionMatrix[$count][$n];
+            }
+            if (($pscd[$n] >= 0) && ($pscd[$n] <= $cu)) {
+                $sumEnergia[$n] = $pscd[$n] * $schedule->getEnergyCost()[$n];
+            }elseif ($pscd[$n] > $cu) {
+                $sumEnergia[$n] = $lambda * $pscd[$n] * $schedule->getEnergyCost()[$n];
+            }
+
+            $denCost[$n] = $schedule->getEnergyCost()[$n] * array_sum($maxConsumption);
+        }
+
+        $totalConsumption = array_sum($sumEnergia) / array_sum($denCost);
+        $totalDTR = array_sum($sumDTR) / ($p * $schedule->getAppliancesCount());
+
+        $score[2] = $weightEnergyCost * $totalConsumption + $weightDTR * $totalDTR;
+
+        $fitness = array_sum($score);;
         $individual->setFitness($fitness);
         return $fitness;
     }
@@ -117,21 +181,19 @@ class GeneticAlgorithm
      * Evaluate a given population
      *
      * @param Population $population The population to evaluate
-     * @param Timetable $timetable Timetable data
+     * @param Schedule $schedule Schedule data
      */
-    public function evaluatePopulation($population)
+    public function evaluatePopulation($population, $schedule)
     {
         $populationFitness = 0;
-
+        
         $individuals = $population->getIndividuals();
 
         foreach ($individuals as $individual) {
-            $populationFitness += $this->calculateFitness($individual);
+            $populationFitness += $this->calculateFitness($individual, $schedule);
         }
 
         $population->setPopulationFitness($populationFitness);
-
-        // return $population;
     }
 
     /**

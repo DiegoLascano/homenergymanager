@@ -5,6 +5,20 @@ namespace App\Services\GeneticAlgorithm;
 class Schedule
 {
     /**
+     * Hourly energy cost indexed by their IDs
+     *
+     * @var array
+     */
+    private $energyCost;
+
+    /**
+     * Appliances indexed by their IDs
+     *
+     * @var array
+     */
+    private $appliances;
+
+    /**
      * Appliances indexed by their IDs
      *
      * @var int
@@ -25,13 +39,36 @@ class Schedule
     */
     public function __construct($timeSlots)
     {
+        $this->appliances = [];
+        $this->energyCost = [];
         $this->appliancesCount = 0;
         $this->timeSlots = $timeSlots;
     }
 
     /**
-    * Set a collection of appliances
+    * Set parameters of appliances
     *
+    * @param array $appliances
+    */
+    public function setAppliances($appliances)
+    {
+        return $this->appliances = $appliances;
+    }
+
+    /**
+    * Set the energy cost array for a given day
+    *
+    * @param array $energyCost
+    */
+    public function setEnergyCost($energyCost)
+    {
+        return $this->energyCost = $energyCost;
+    }
+
+    /**
+    * Set the number of appliances
+    *    
+    * @param int $appliancesCount
     */
     public function setAppliancesCount($appliancesCount)
     {
@@ -39,7 +76,26 @@ class Schedule
     }
 
     /**
-    * Get a collection of appliances
+    * Get parameters of appliances
+    *
+    */
+    public function getAppliances()
+    {
+        return $this->appliances;
+    }
+
+    /**
+    * Gets the energy cost 
+    *
+    * @param array $energyCost
+    */
+    public function getEnergyCost()
+    {
+        return $this->energyCost;
+    }
+
+    /**
+    * Get the number of appliances 
     *
     */
     public function getAppliancesCount()
@@ -55,4 +111,5 @@ class Schedule
     {
         return $this->timeSlots;
     }
+
 }

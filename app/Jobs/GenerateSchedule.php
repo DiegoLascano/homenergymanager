@@ -33,7 +33,7 @@ class GenerateSchedule implements ShouldQueue
      */
     public function handle()
     {
-        \Log::info('Generating timetable');
+        \Log::info('Generating New Schedule');
         // dump('Generating timetable');
         $geneticAlgorithm = new SchedulingGA($this->schedule);
 
