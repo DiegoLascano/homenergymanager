@@ -21,6 +21,9 @@ use App\Services\GeneticAlgorithm\FitnessFunction;
 |
 */
 
+Route::get('/prueba', function () {
+    return view('tw_layout');
+});
 Route::get('/', function () {
     return view('welcome');
 });

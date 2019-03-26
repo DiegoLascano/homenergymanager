@@ -27,7 +27,6 @@ class ScheduleEventSubscriber
     */
     public function onScheduleGenerated($event)
     {
-        // return $event->newSchedule;
         dispatch(new SendScheduleGeneratedNotification($event->newSchedule))->delay(now()->addSeconds(2));
     }
 

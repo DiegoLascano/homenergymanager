@@ -125,6 +125,10 @@ class Individual
         return $this->getChromosomeString();
     }
 
+    /**
+     * Convert array to string to be stored in the DB
+     *
+     */
     public function getChromosomeString()
     {
         return implode(",", $this->chromosome);

@@ -65,12 +65,26 @@
 @import url('https://fonts.googleapis.com/css?family=Nunito');
 
 // Variables
-@import 'variables';
+// @import 'variables';
 
 // Bootstrap
-@import '~bootstrap/scss/bootstrap';
+// @import '~bootstrap/scss/bootstrap';
 
 .navbar-laravel {
   background-color: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+}
+
+header {
+  background-image: linear-gradient(5deg, #486581, #243B53)
+}
+
+.container{
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.header-title{
+  font-family: 'Nunito', sans-serif;
+  font-weight: 200;
 }

@@ -1,7 +1,23 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<header>
+    <div class="container">
+        <div class="header-top">
+            <h1>HEMS</h1>
+            <a href="#">Sign in</a>
+        </div>
+        <nav>
+            <a href="#">Catalog</a>
+            <a href="#">Series</a>
+            <a href="#">Podcast</a>
+            <a href="#">Discussions</a>
+        </nav>
+    </div>
+</header>
+@endsection
+
+{{-- <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
@@ -19,5 +35,4 @@
             </div>
         </div>
     </div>
-</div>
-@endsection
+</div> --}}

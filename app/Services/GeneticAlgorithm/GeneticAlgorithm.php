@@ -100,15 +100,18 @@ class GeneticAlgorithm
     * Calculate the fitness of an individual
     *
     * @param Individual $individual The individual to be analized
-    * @param OST $ost Operation start time vector
+    * @param Schedule $schedule Schedule
     * @return double The fitness of the individual
     */
     public function calculateFitness($individual, $schedule)
     {
         // Variable initialization
-        $pscd = array_fill(0, $schedule->getTimeslots(), 0);
-        $sumEnergia = array_fill(0, $schedule->getTimeslots(), 0);
-        $denCost = array_fill(0, $schedule->getTimeslots(), 0);
+        $currentTimeslot = $schedule->getTimeslots() - 1;
+        $lastTimeslot = 120;
+
+        $pscd = array_fill(0, $lastTimeslot, 0);
+        $sumEnergia = array_fill(0, $lastTimeslot, 0);
+        $denCost = array_fill(0, $lastTimeslot, 0);
         $score = array_fill(0, 2, 0);
         $p = 5; //variable para la sumatoria DTR
         $cu = 0.4; //thresshold of electrical energy consumed
@@ -136,25 +139,25 @@ class GeneticAlgorithm
             }
             
             // Constraint verification
-            if ($finish > $schedule->getTimeslots()) {
+            if ($finish > $lastTimeslot) {
                 $score[1] += 2; 
             }
 
             // Matriz de consumo
-            $consumptionMatrix[$i] = array_fill(0, $schedule->getTimeslots(), 0);
+            $consumptionMatrix[$i] = array_fill(0, $lastTimeslot, 0);
             for ($j = $start; $j < $finish; $j++) { 
-                $consumptionMatrix[$i][$j] = $appliance->power_kWh / ($schedule->getTimeslots() / 24);
+                $consumptionMatrix[$i][$j] = $appliance->power_kWh / ($lastTimeslot / 24);
             }
             $i++;
         }
 
         // Max consumption vector for each appliance within a single timeslot
         for ($m = 1; $m < $schedule->getAppliancesCount(); $m++) { 
-            $maxConsumption[$m] = $schedule->getEnergyCost()[$m] / ($schedule->getTimeslots() / 24);
+            $maxConsumption[$m] = $schedule->getEnergyCost()[$m] / ($lastTimeslot / 24);
         }
 
         // Summation for the cost of energy
-        for ($n = 0; $n < $schedule->getTimeslots(); $n++) { 
+        for ($n = $currentTimeslot; $n < $lastTimeslot; $n++) { 
             for ($count=0; $count < $schedule->getAppliancesCount(); $count++) { 
                 $pscd[$n] =  $pscd[$n] + $consumptionMatrix[$count][$n];
             }

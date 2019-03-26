@@ -32,7 +32,7 @@ class SchedulingGA
         $minute = Carbon::now()->minute;
         $timeslot = (int)ceil(($hour * 60 + $minute) / 12);
 
-        $timeslot = 120; //this variable has to be removed
+        $timeslot = 1; //this variable has to be removed
 
         return $timeslot;
     }
@@ -112,8 +112,6 @@ class SchedulingGA
             $fittest = $population->getFittest(0);
     
             print "Generation: " . $generation . "(" . $fittest->getFitness() . ") Generations maintained: " . $maintainedGenerations;
-            // print $fittest;
-            // print "Generation: " . $generation;
             print "\n";
     
             // Apply crossover
@@ -139,17 +137,17 @@ class SchedulingGA
             // Cool temperature of GA for simulated annealing
             $algorithm->coolTemperature();
         }
-        $optimalSolution =  $population->getFittest(0);
+        $bestSolution =  $population->getFittest(0);
 
         // Update Schedule in database
-        // $this->schedule->update([
-        //     'chromosome' => $optimalSolution->getChromosomeString(),
-        //     'fitness' => $optimalSolution->getFitness(),
-        //     'generations' => $generation,
-        //     'status' => 'COMPLETED'
-        // ]);
-        // event(new ScheduleGenerated($optimalSolution));
+        $this->schedule->update([
+            'chromosome' => $bestSolution->getChromosomeString(),
+            'fitness' => $bestSolution->getFitness(),
+            'generations' => $generation,
+            'status' => 'COMPLETED'
+        ]);
+        // event(new ScheduleGenerated($bestSolution));
 
-        dump($optimalSolution);
+        dump($bestSolution);
     }
 }

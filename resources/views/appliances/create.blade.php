@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+<div class="container mx-auto">
     <h1>Create Appliances</h1>
 
     <form method="POST" action="/appliances">
@@ -67,4 +68,5 @@
     </form>
 
     @include('partials.errors')
+</div>
 @endsection
