@@ -37,44 +37,50 @@
             <a href="#" class="text-grey no-underline hover:text-white text-sm uppercase mx-3">information</a>
         </nav>
     </header>
-    <div class="container">
+    <div id="app" class="container">
         <div class="md:min-h-screen md:flex md:flex-col">
             <div class="md:flex md:flex-1">
                 <aside class="bg-blue p-3">
                     Space for Widgets
                 </aside>
-                <main class="bg-red md:flex-1 p-3">
+                <main class="bg-grey-100 md:flex-1 p-3">
                     <div class="flex flex-wrap">
                         <div class="w-full p-3">
-                            <div class="bg-grey-light p-3 md:mb-2 md:mx-2">
-                                <p>Graph from vue-chart.js</p>
+                            <div class="md:mb-2 md:mx-2">
+                                    {{-- <p>Product Feature</p> --}}
+
+                                <div class="graph-container bg-white border-2 border-solid border-grey rounded-lg">
+                                    <cost-graph url="/api/getEnergyCost"></cost-graph>
+                                </div>
                             </div>
                         </div>
     
                         <div class="w-full sm:w-1/2 md:w-1/4 p-3">
-                            <div class="bg-grey-light p-3 md:mb-2 md:mx-2">
+                            <div class="bg-grey-light md:mb-2 md:mx-2">
                                 <p>Product Feature</p>
                             </div>
                         </div>
     
                         <div class="w-full sm:w-1/2 md:w-1/4 p-3">
-                            <div class="bg-grey-light p-3 md:mb-2 md:mx-2">
+                            <div class="bg-grey-light md:mb-2 md:mx-2">
                                 <p>Product Feature</p>
                             </div>
                         </div>
     
                         <div class="w-full sm:w-1/2 md:w-1/4 p-3">
-                            <div class="bg-grey-light p-3 md:mb-2 md:mx-2">
+                            <div class="bg-grey-light md:mb-2 md:mx-2">
                                 <p>Product Feature</p>
                             </div>
                         </div>
                     </div>
                 </main>
             </div>
-            <footer class="bg-grey p-3">
-                Copyright 2018
-            </footer>
         </div>
     </div>
+    <footer class="text-white p-3">
+        <div class="container text-center p-3">
+            Copyright 2018
+        </div>
+    </footer>
 </body>
 </html>

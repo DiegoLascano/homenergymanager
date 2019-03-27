@@ -142,7 +142,7 @@ let colors = {
   "cyan-800": "#0A6C74",
   "cyan-900": "#044E54",
   
-  // Neutrals
+  // Neutrals (Blue grey)
   "grey-050": "#F0F4F8",
   "grey-100": "#D9E2EC",
   "grey-200": "#BCCCDC",

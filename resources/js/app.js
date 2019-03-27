@@ -1,3 +1,10 @@
+/**
+ * Imports
+ */
+
+// For Chart.js
+import Chart from 'chart.js';
+window.Chart = Chart;
 
 /**
  * First we will load all of this project's JavaScript dependencies which
@@ -21,6 +28,8 @@ window.Vue = require('vue');
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+Vue.component('cost-graph', require('./components/CostGraph/CostGraph.vue').default);
+Vue.component('prueba-graph', require('./components/CostGraph/Prueba.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
