@@ -1,25 +1,33 @@
 <template>
   <div>
+      <div class="flex justify-between p-2">
+          <div>
+            <label>Primer día: </label>
+            <select v-model="day1" @change="reload">
+                <option v-for="n in 365">{{ n }}</option>
+            </select>
+          </div>
+          <div>
+            <label>Segundo día: </label>
+            <select v-model="day2" @change="reload">
+                <option v-for="n in 365">{{ n }}</option>
+            </select>
+          </div>
+      </div>
     <line-chart :height="200" :chart-data="chartData" :options="chartOptions"></line-chart>
   </div>
 </template>
 
 <script>
-  import LineChart from './LineChart.js'
-
+  import LineGraph from './LineGraph.vue'
   export default {
-    components: {
-        LineChart
+    extends: LineGraph,
+
+    props: {
+        day1: { default: 1 },
+        day2: {default:50}
     },
-
-    props: ['url'],
-
-    data () {
-        return {
-            chartData: null,
-        }
-    },
-
+    
     computed: {
         chartOptions() {
             return {
@@ -44,7 +52,7 @@
                             display: true,
                             fontSize: 13,
                             fontStyle: 'bold',
-                            labelString: "Costo de energía [¢ / kWh]"
+                            labelString: "Costo [¢ / kWh]"
                         },
                         gridLines: {
                             display: false,
@@ -81,55 +89,16 @@
         }
     },
 
-    mounted () {
-        this.getData ()
-    },
     methods: {
-        getData () {
-            axios.get(this.url)
-                .then(response => {
-                    this.fillData(response.data)
-                })
+        fetchData () {
+            console.log()
+            return axios.get(this.url, { 
+                params: {
+                    day1: this.day1,
+                    day2: this.day2
+                }
+            })
         },
-        fillData (data) {
-            this.chartData = {
-                labels: data.labels,
-                datasets: [
-                    {
-                        label: data.datasets.label,
-                        backgroundColor: data.datasets.backgroundColor,
-                        borderColor: data.datasets.borderColor,
-                        pointBackgroundColor: data.datasets.pointBackgroundColor,
-                        pointBorderColor: data.datasets.pointBorderColor,
-                        steppedLine: true,
-                        data: data.datasets.data
-                    }, 
-                    // {
-                    //     label: data.datasets[0].label,
-                    //     backgroundColor: data.datasets[0].backgroundColor,
-                    //     borderColor: data.datasets[0].borderColor,
-                    //     pointBackgroundColor: data.datasets[0].pointBackgroundColor,
-                    //     pointBorderColor: data.datasets[0].pointBorderColor,
-                    //     data: data.datasets[0].data
-                    // }, 
-                    // {
-                    //     label: data.datasets[1].label,
-                    //     backgroundColor: data.datasets[1].backgroundColor,
-                    //     borderColor: data.datasets[1].borderColor,
-                    //     pointBackgroundColor: data.datasets[1].pointBackgroundColor,
-                    //     pointBorderColor: data.datasets[1].pointBorderColor,
-                    //     data: data.datasets[1].data
-                    // }
-                ]
-            }
-        }
     }
   }
 </script>
-
-<style>
-  .small {
-    max-width: 600px;
-    margin: auto;
-  }
-</style>

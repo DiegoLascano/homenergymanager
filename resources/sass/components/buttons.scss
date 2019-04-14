@@ -1,0 +1,19 @@
+.btn{
+    @apply text-sm font-bold rounded-full px-4 py-1 leading-normal;
+}
+
+.btn-primary{
+    @apply bg-cyan-600 border border-cyan-500 text-white;
+}
+
+.btn-primary:hover{
+    @apply bg-cyan-700 border-cyan-700;
+}
+
+.btn-outline{
+    @apply bg-white border border-cyan-600 text-cyan-600;
+}
+
+.btn-outline:hover{
+    @apply bg-cyan-200 border-cyan-500 text-cyan-900;
+}

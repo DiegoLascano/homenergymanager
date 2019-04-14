@@ -30,27 +30,29 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
+Route::get('/dashboard', 'TabsController@dashboard')->name('dashboard');
+Route::get('/graphs', 'TabsController@graphs')->name('graphs');
 
 Route::get('/api/getEnergyCost', 'grabData@getEnergyCost')->name('getEnergyCost');
+Route::get('/api/getPV', 'grabData@getPV')->name('getPV');
 
 Route::get('/ga', function() {
 
-    $today = Carbon::today()->format('Y-m-d');
-    $data = Prcu::where('date', $today)->get();
+    // $today = Carbon::today()->format('Y-m-d');
+    // $data = Prcu::where('date', $today)->get();
 
-    // dd($data[0]['date']);
-    $costArray = [];
-    for ($i=1; $i < 25; $i++) { 
-        $costArray[$i-1] = $data[0][$i];
-    }
+    // // dd($data[0]['date']);
+    // $costArray = [];
+    // for ($i=1; $i < 25; $i++) { 
+    //     $costArray[$i-1] = $data[0][$i];
+    // }
 
-    foreach ($costArray as $key => $value) {
-        $energyCost['datasets'][$key] = $value;
-    }
-    // $energyCost['labels'] = collect($costArray)->keys();
+    // foreach ($costArray as $key => $value) {
+    //     $energyCost['datasets'][$key] = $value;
+    // }
+    // // $energyCost['labels'] = collect($costArray)->keys();
 
-    dd($energyCost);
+    // dd($energyCost);
 
     // $individual = Individual::random(16);
     // dump($individual->getChromosome()[4]);

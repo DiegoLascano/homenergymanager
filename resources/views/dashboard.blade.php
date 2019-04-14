@@ -1,38 +1,50 @@
 @extends('layouts.app')
 
 @section('content')
-<header>
-    <div class="container">
-        <div class="header-top">
-            <h1>HEMS</h1>
-            <a href="#">Sign in</a>
-        </div>
-        <nav>
-            <a href="#">Catalog</a>
-            <a href="#">Series</a>
-            <a href="#">Podcast</a>
-            <a href="#">Discussions</a>
-        </nav>
-    </div>
-</header>
-@endsection
-
-{{-- <div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">Dashboard</div>
-
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
+{{-- Este layout es para probar el diseño responsive usando Tailwind CSS --}}
+<div id="app" class="container">
+    <div class="md:min-h-screen md:flex md:flex-col">
+        <div class="md:flex md:flex-1">
+            <aside class="bg-blue p-3">
+                Space for Widgets
+            </aside>
+            <main class="bg-grey-100 md:flex-1 p-3">
+                <div class="flex flex-wrap">
+                    <div class="w-full p-3">
+                        <div class="md:mb-2 md:mx-2">
+                            <div class="lg:max-w-lg md:max-w-md mx-auto bg-white border border-solid border-cyan-600 rounded-lg">
+                                <cost-graph url="/api/getEnergyCost" day="1"></cost-graph>
+                            </div>
                         </div>
-                    @endif
+                    </div>
+                    {{-- <div class="w-full p-3">
+                        <div class="md:mb-2 md:mx-2">
+                            <div class="graph-container bg-white border-2 border-solid border-grey rounded-lg">
+                                <line-graph url="/api/getEnergyCost"></line-graph>
+                            </div>
+                        </div>
+                    </div> --}}
 
-                    Wellcome to the Dashboard
+                    <div class="w-full sm:w-1/2 md:w-1/4 p-3">
+                        <div class="bg-grey-light md:mb-2 md:mx-2">
+                            <p>Product Feature</p>
+                        </div>
+                    </div>
+
+                    <div class="w-full sm:w-1/2 md:w-1/4 p-3">
+                        <div class="bg-grey-light md:mb-2 md:mx-2">
+                            <p>Product Feature</p>
+                        </div>
+                    </div>
+
+                    <div class="w-full sm:w-1/2 md:w-1/4 p-3">
+                        <div class="bg-grey-light md:mb-2 md:mx-2">
+                            <p>Product Feature</p>
+                        </div>
+                    </div>
                 </div>
-            </div>
+            </main>
         </div>
     </div>
-</div> --}}
+</div>
+@endsection

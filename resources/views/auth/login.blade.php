@@ -1,7 +1,42 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="min-h-screen">
+    <div class="form-box">
+        <p class="text-cyan-800 text-center text-md font-bold mb-4 uppercase">Login Form</p>
+        <form method="POST" action="{{ route('login') }}">
+            @csrf
+            {{-- <div class="mb-4">
+                <label class="block text-grey-darker text-sm font-bold mb-2" for="username">
+                    Username
+                </label>
+                <input class="input-box focus:shadow-outline" id="username" type="text" placeholder="Username">
+            </div> --}}
+            <div class="mb-4">
+                <label class="label-text" for="email">
+                    Email
+                </label>
+                <input name="email" class="input-box focus:border-cyan-600" id="email" type="email" placeholder="Email" required>
+            </div>
+            <div class="mb-6">
+                <label class="label-text" for="password">
+                    Password
+                </label>
+                <input name="password" class="input-box focus:border-cyan-600" id="password" type="password" placeholder="******************" required>
+            </div>
+            <div class="flex items-center justify-between">
+                <button class="btn btn-outline" type="submit">
+                    Sign In
+                </button>
+                <a class="inline-block align-baseline font-bold text-sm text-cyan-600 hover:text-cyan-900" href="#">
+                    Forgot Password?
+                </a>
+            </div>
+        </form>
+        @include('partials.errors')
+    </div>
+</div>
+{{-- <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
@@ -69,5 +104,5 @@
             </div>
         </div>
     </div>
-</div>
+</div> --}}
 @endsection

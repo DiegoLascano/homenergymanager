@@ -1,29 +1,33 @@
-@extends('layouts.app')
+ @extends('layouts.body')
 
-@section('content')
-    <h1>Appliances Index</h1>
-    <table class="table">
-        <thead class="thead-dark">
+@section('body-sidebar')
+    <p>Sidebaaaarr</p>
+@endsection
+
+@section('body-main')
+    <div class="md:w-3/4 mx-auto overflow-x-auto bg-white border rounded-lg shadow-lg">
+        <p class="text-cyan-800 text-center text-md font-bold uppercase p-4">Appliances</p>
+        <table class="w-full">
             <tr>
-                <th scope="col">ID</th>
-                <th scope="col">Name</th>
-                <th scope="col">Power</th>
-                <th scope="col">Operation Interval</th>
-                <th scope="col">Operation Length</th>
-                <th scope="col">Status</th>
+                <th class="bg-grey-300 align-left p-1 text-center">ID</th>
+                <th class="bg-grey-300 align-left p-1 text-center">Name</th>
+                <th class="bg-grey-300 align-left p-1 text-center">Power[kWh]</th>
+                <th class="bg-grey-300 align-left p-1 text-center">Start[h]</th>
+                <th class="bg-grey-300 align-left p-1 text-center">End[h]</th>
+                <th class="bg-grey-300 align-left p-1 text-center">Length[h]</th>
+                <th class="bg-grey-300 align-left p-1 text-center">Status</th>
             </tr>
-        </thead>
-        <tbody>
             @foreach ($appliances as $appliance)
                 <tr>
-                    <th scope="row">{{ $appliance->id }}</th>
-                    <td>{{ $appliance->name }}</td>
-                    <td>{{ $appliance->power_kWh }}</td>
-                    <td>{{ $appliance->start_oti / 5}} - {{ $appliance->finish_oti / 5}}</td>
-                    <td>{{ $appliance->length_operation / 5}}</td>
-                    <td>{{ $appliance->status }}</td>
+                    <th class="border align-left p-1 text-center">{{ $appliance->id }}</th>
+                    <td class="border align-left p-1">{{ $appliance->name }}</td>
+                    <td class="border align-left p-1 text-center">{{ $appliance->power_kWh }}</td>
+                    <td class="border align-left p-1 text-center">{{ ceil($appliance->start_oti / 5)}}</td>
+                    <td class="border align-left p-1 text-center">{{ ceil($appliance->finish_oti / 5)}}</td>
+                    <td class="border align-left p-1 text-center">{{ $appliance->length_operation * 12}}</td>
+                    <td class="border align-left p-1 text-center">{{ $appliance->status }}</td>
                 </tr>
             @endforeach
-        </tbody>
-    </table>
+        </table>
+    </div>
 @endsection

@@ -1,7 +1,49 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="min-h-screen">
+    <div class="form-box">
+        <p class="text-cyan-800 text-center text-md font-bold mb-4 uppercase">Registration Form</p>
+        <form method="POST" action="{{ route('register') }}">
+            @csrf
+            <div class="mb-4">
+                <label class="label-text" for="name">
+                    Name
+                </label>
+                <input name="name" class="input-box" id="name" type="name" placeholder="Name" required>
+            </div>
+            <div class="mb-4">
+                <label class="label-text" for="email">
+                    Email
+                </label>
+                <input name="email" class="input-box" id="email" type="email" placeholder="Email">
+            </div>
+            <div class="mb-4">
+                <label class="label-text" for="password">
+                    Password
+                </label>
+                <input name="password" class="input-box" id="password" type="password" placeholder="******************" required>
+            </div>
+            <div class="mb-6">
+                <label class="label-text" for="password_confirmation">
+                    Password Confirmation
+                </label>
+                <input name="password_confirmation" class="input-box" id="password_confirmation" type="password_confirmation" placeholder="******************" required>
+            </div>
+            <div class="flex items-center justify-between">
+                <button class="btn btn-outline" type="submit">
+                    Register
+                </button>
+                <a class="inline-block align-baseline font-bold text-sm text-cyan-600 hover:text-cyan-900" href="/login">
+                    Already have an account?
+                </a>
+            </div>
+        </form>
+        @include('partials.errors')
+    </div>
+</div>
+@endsection
+{{-- <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
@@ -26,38 +68,38 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
 
                             <div class="col-md-6">
-                                <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required>
+                                <input id="name" type="name" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ old('name') }}" required>
 
-                                @if ($errors->has('email'))
+                                @if ($errors->has('name'))
                                     <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('email') }}</strong>
+                                        <strong>{{ $errors->first('name') }}</strong>
                                     </span>
                                 @endif
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
+                            <label for="password_confirmation" class="col-md-4 col-form-label text-md-right">{{ __('Password_confirmation') }}</label>
 
                             <div class="col-md-6">
-                                <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
+                                <input id="password_confirmation" type="password_confirmation" class="form-control{{ $errors->has('password_confirmation') ? ' is-invalid' : '' }}" name="password_confirmation" required>
 
-                                @if ($errors->has('password'))
+                                @if ($errors->has('password_confirmation'))
                                     <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('password') }}</strong>
+                                        <strong>{{ $errors->first('password_confirmation') }}</strong>
                                     </span>
                                 @endif
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
+                            <label for="password_confirmation-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password_confirmation') }}</label>
 
                             <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
+                                <input id="password_confirmation-confirm" type="password_confirmation" class="form-control" name="password_confirmation_confirmation" required>
                             </div>
                         </div>
 
@@ -73,5 +115,4 @@
             </div>
         </div>
     </div>
-</div>
-@endsection
+</div> --}}

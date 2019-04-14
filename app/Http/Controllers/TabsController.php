@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class DashboardController extends Controller
+class TabsController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -21,8 +21,18 @@ class DashboardController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function dashboard()
     {
         return view('dashboard');
+    }
+
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function graphs()
+    {
+        return view('graphs');
     }
 }

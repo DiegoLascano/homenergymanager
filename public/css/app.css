@@ -566,6 +566,121 @@ table {
  * @import "components/forms";
  */
 
+.nav-link {
+  color: #b8c2cc;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  font-size: .875rem;
+  margin-left: .5rem;
+  margin-right: .5rem;
+  padding-left: .5rem;
+  padding-right: .5rem;
+  padding-top: .25rem;
+  padding-bottom: .25rem;
+}
+
+.nav-link:hover {
+  background-color: #87eaf2;
+  border-color: #2cb1bc;
+  border-radius: 9999px;
+  color: #044e54;
+  font-weight: 600;
+}
+
+.input-box {
+  display: block;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .1);
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  border-width: 1px;
+  border-radius: .25rem;
+  width: 100%;
+  padding-top: .5rem;
+  padding-bottom: .5rem;
+  padding-left: .75rem;
+  padding-right: .75rem;
+  color: #3d4852;
+  font-size: .875rem;
+  line-height: 1.25;
+}
+
+.input-box:hover {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, .12), 0 2px 4px 0 rgba(0, 0, 0, .08);
+}
+
+.input-box:focus {
+  border-color: #14919b;
+}
+
+.form-box {
+  background-color: #fff;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 20rem;
+  box-shadow: 0 15px 30px 0 rgba(0, 0, 0, .11), 0 5px 15px 0 rgba(0, 0, 0, .08);
+  border-radius: .5rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  padding-top: 1.5rem;
+  padding-bottom: 2rem;
+  margin-top: 1rem;
+}
+
+@media (min-width: 768px) {
+  .form-box {
+    max-width: 30rem;
+    margin-top: 2.5rem;
+  }
+}
+
+.label-text {
+  display: block;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  color: #606f7b;
+  font-size: .75rem;
+  font-weight: 700;
+  margin-bottom: .5rem;
+}
+
+.btn {
+  font-size: .875rem;
+  font-weight: 700;
+  border-radius: 9999px;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: .25rem;
+  padding-bottom: .25rem;
+  line-height: 1.5;
+}
+
+.btn-primary {
+  background-color: #14919b;
+  border-width: 1px;
+  border-color: #2cb1bc;
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background-color: #0e7c86;
+  border-color: #0e7c86;
+}
+
+.btn-outline {
+  background-color: #fff;
+  border-width: 1px;
+  border-color: #14919b;
+  color: #14919b;
+}
+
+.btn-outline:hover {
+  background-color: #87eaf2;
+  border-color: #2cb1bc;
+  color: #044e54;
+}
+
 /**
  * This injects all of Tailwind's utility classes, generated based on your
  * config file.
@@ -8105,6 +8220,10 @@ table {
 
 .tracking-wide {
   letter-spacing: .05em;
+}
+
+.tracking-xwide {
+  letter-spacing: .1em;
 }
 
 .select-none {
@@ -15886,6 +16005,10 @@ body {
     letter-spacing: .05em;
   }
 
+  .sm\:tracking-xwide {
+    letter-spacing: .1em;
+  }
+
   .sm\:select-none {
     -webkit-user-select: none;
        -moz-user-select: none;
@@ -23618,6 +23741,10 @@ body {
 
   .md\:tracking-wide {
     letter-spacing: .05em;
+  }
+
+  .md\:tracking-xwide {
+    letter-spacing: .1em;
   }
 
   .md\:select-none {
@@ -31354,6 +31481,10 @@ body {
     letter-spacing: .05em;
   }
 
+  .lg\:tracking-xwide {
+    letter-spacing: .1em;
+  }
+
   .lg\:select-none {
     -webkit-user-select: none;
        -moz-user-select: none;
@@ -39086,6 +39217,10 @@ body {
 
   .xl\:tracking-wide {
     letter-spacing: .05em;
+  }
+
+  .xl\:tracking-xwide {
+    letter-spacing: .1em;
   }
 
   .xl\:select-none {

@@ -1,0 +1,7 @@
+.nav-link {
+    @apply text-grey no-underline uppercase tracking-xwide text-sm mx-2 px-2 py-1;
+}
+  
+.nav-link:hover{
+    @apply bg-cyan-200 border-cyan-500 rounded-full text-cyan-900 font-semibold;
+}

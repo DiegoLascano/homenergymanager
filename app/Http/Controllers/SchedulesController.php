@@ -24,8 +24,8 @@ class SchedulesController extends Controller
      */
     public function index()
     {
-        $message = ['name' => 'Diego', 'lastname' => 'Lascano'];
-        event(new ScheduleGenerated($message));
+        // $message = ['name' => 'Diego', 'lastname' => 'Lascano'];
+        // event(new ScheduleGenerated($message));
         // dispatch(new SendScheduleGeneratedNotification)->delay(now()->addSeconds(5));
         // return "Hello from SchedulesController Index method";
     }

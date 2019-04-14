@@ -1,0 +1,25 @@
+.input-box {
+    @apply block shadow appearance-none border rounded w-full py-2 px-3 text-grey-darkest text-sm leading-tight ;
+}
+
+.input-box:hover{
+    @apply shadow-md;
+}
+
+.input-box:focus{
+    @apply border-cyan-600;
+}
+
+.form-box{
+    @apply bg-white mx-auto max-w-xs shadow-lg rounded-lg px-8 pt-6 pb-8 mt-4;
+}
+
+@screen md{
+    .form-box{
+        @apply max-w-sm mt-10;
+    }
+}
+
+.label-text{
+    @apply block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2;
+}

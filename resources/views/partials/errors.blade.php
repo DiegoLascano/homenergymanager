@@ -1,5 +1,5 @@
 @if ($errors->any())
-    <div class="">
+    <div class="bg-red-light rounded-full mt-4">
         <ul>
             @foreach ($errors->all() as $error)
                 <li>{{ $error }}</li>

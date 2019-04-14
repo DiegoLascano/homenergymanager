@@ -21,22 +21,7 @@
 </head>
 <body>
     {{-- Este layout es para probar el diseño responsive usando Tailwind CSS --}}
-    <header>
-        <div class="container flex justify-between p-3">
-            <a class="text-grey no-underline hover:text-white" href="{{ url('/') }}">
-                {{ config('app.name', 'Laravel') }}
-            </a>
-            <a href="#" class="text-grey no-underline hover:text-white uppercase text-sm">Sign in</a>
-        </div>
-        <div class="container mx-auto p-3">
-            <p class="header-title text-white text-2xl text-center uppercase">Home Energy Management System</p>
-        </div>
-        <nav class="container flex justify-center p-3">
-            <a href="#" class="text-grey no-underline hover:text-white text-sm uppercase mx-3">Dashboard</a>
-            <a href="#" class="text-grey no-underline hover:text-white text-sm uppercase mx-3">Queries</a>
-            <a href="#" class="text-grey no-underline hover:text-white text-sm uppercase mx-3">information</a>
-        </nav>
-    </header>
+    @include('partials.navbar')
     <div id="app" class="container">
         <div class="md:min-h-screen md:flex md:flex-col">
             <div class="md:flex md:flex-1">
@@ -47,13 +32,18 @@
                     <div class="flex flex-wrap">
                         <div class="w-full p-3">
                             <div class="md:mb-2 md:mx-2">
-                                    {{-- <p>Product Feature</p> --}}
-
                                 <div class="graph-container bg-white border-2 border-solid border-grey rounded-lg">
-                                    <cost-graph url="/api/getEnergyCost"></cost-graph>
+                                    <cost-graph url="/api/getEnergyCost" day="1"></cost-graph>
                                 </div>
                             </div>
                         </div>
+                        {{-- <div class="w-full p-3">
+                            <div class="md:mb-2 md:mx-2">
+                                <div class="graph-container bg-white border-2 border-solid border-grey rounded-lg">
+                                    <line-graph url="/api/getEnergyCost"></line-graph>
+                                </div>
+                            </div>
+                        </div> --}}
     
                         <div class="w-full sm:w-1/2 md:w-1/4 p-3">
                             <div class="bg-grey-light md:mb-2 md:mx-2">
