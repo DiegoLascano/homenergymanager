@@ -561,6 +561,7 @@ module.exports = {
     '5': '1.25rem',
     '6': '1.5rem',
     '8': '2rem',
+    '9': '2.25rem', //user added for 36px icon
     '10': '2.5rem',
     '12': '3rem',
     '16': '4rem',
@@ -610,6 +611,7 @@ module.exports = {
     '5': '1.25rem',
     '6': '1.5rem',
     '8': '2rem',
+    '9': '2.25rem', //user added for 36px icon
     '10': '2.5rem',
     '12': '3rem',
     '16': '4rem',
@@ -617,6 +619,7 @@ module.exports = {
     '32': '8rem',
     '48': '12rem',
     '64': '16rem',
+    '80': '20rem',
     'full': '100%',
     'screen': '100vh',
   },
@@ -784,6 +787,7 @@ module.exports = {
     '20': '5rem',
     '24': '6rem',
     '32': '8rem',
+    '64': '16rem',
   },
 
 

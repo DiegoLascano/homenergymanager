@@ -1,0 +1,9 @@
+.card-small{
+    @apply h-24;
+}
+
+@screen md{
+    .card-small{
+        min-width: 260;
+    }
+}

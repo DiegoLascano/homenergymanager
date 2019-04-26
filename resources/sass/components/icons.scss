@@ -1,0 +1,85 @@
+.icon-24{ //24x24px
+    @apply w-6 h-6; 
+}
+
+.icon-36{ //36x36px
+    @apply w-9 h-9;
+}
+
+// For all inactive icons
+.primary{
+    fill: #9FB3C8;
+}
+.secondary{
+    fill: #102A43;
+}
+
+// Launch icon used in the brand-box
+.icon-launch > g >.primary{
+    fill: #FFFFFF;
+}
+.icon-launch > g > .secondary{
+    fill: #334E68;
+}
+
+// Light Bulb icon - active
+.icon-light > .primary{
+    fill: #C99A2E;
+}
+.icon-light > .secondary{
+    fill: #243B53;
+}
+
+// Euro icon - active
+.icon-euro > .primary{
+    fill: #243B53;
+}
+.icon-euro > .secondary{
+    fill: #C99A2E;
+}
+
+// User icon
+.icon-user-circle > g > .primary{
+    fill: #102A43;
+}
+.icon-user-circle > g > .secondary{
+    fill: #F0F4F8;
+}
+// .icon-cheveron-down:hover > .secondary{
+//     fill: #14919B;
+// }
+.user-name:hover{
+    // Arrow down icon
+    .icon-cheveron-down > .secondary{
+        fill: #14919B;
+    }
+    .icon-user-circle > g > .primary{
+        fill: #14919B;
+    }
+}
+
+// Menu icon
+.icon-menu:hover > .secondary{
+    fill: #14919B;
+}
+
+// Application icon
+.icon-application:hover > .primary{
+    fill: #14919B;
+}
+
+// sidebar active item icon
+.active > a > svg > .primary{
+    fill: #38BEC9;
+}
+.active > a > svg > .secondary{
+    fill: #fff;
+}
+
+// sidebar hovered item icon
+.sidebar-list > li:hover > a > svg > .primary{
+    fill: #38BEC9;
+}
+.sidebar-list > li:hover > a > svg > .secondary{
+    fill: #fff;
+}

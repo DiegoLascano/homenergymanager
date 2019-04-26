@@ -1,8 +1,12 @@
 @extends('layouts.app')
 
+@section('sidebar')
+    {{-- @parent --}}
+@endsection
+
 @section('content')
-<div class="min-h-screen">
-    <div class="form-box">
+<div class="my-auto">
+    <div class="form-box mx-auto">
         <p class="text-cyan-800 text-center text-md font-bold mb-4 uppercase">Registration Form</p>
         <form method="POST" action="{{ route('register') }}">
             @csrf
@@ -30,11 +34,11 @@
                 </label>
                 <input name="password_confirmation" class="input-box" id="password_confirmation" type="password_confirmation" placeholder="******************" required>
             </div>
-            <div class="flex items-center justify-between">
-                <button class="btn btn-outline" type="submit">
+            <div class="flex flex-wrap items-center justify-between">
+                <button class="btn btn-primary" type="submit">
                     Register
                 </button>
-                <a class="inline-block align-baseline font-bold text-sm text-cyan-600 hover:text-cyan-900" href="/login">
+                <a class="inline-block align-baseline font-bold text-sm text-cyan-600 hover:text-cyan-900 mt-2 md:mt-0" href="/login">
                     Already have an account?
                 </a>
             </div>

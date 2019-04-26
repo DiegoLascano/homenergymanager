@@ -11,12 +11,13 @@
 }
 
 .form-box{
-    @apply bg-white mx-auto max-w-xs shadow-lg rounded-lg px-8 pt-6 pb-8 mt-4;
+    @apply bg-white max-w-xs shadow-lg rounded-lg px-8 pt-6 pb-8;
+    // @apply bg-white mx-auto max-w-xs shadow-lg rounded-lg px-8 pt-6 pb-8;
 }
 
 @screen md{
     .form-box{
-        @apply max-w-sm mt-10;
+        @apply max-w-sm;
     }
 }
 

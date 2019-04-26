@@ -7,6 +7,7 @@ use App\Schedule as ScheduleModel;
 use App\Appliance as ApplianceModel;
 use Carbon\Carbon;
 use App\Prcu;
+use App\PowerGenerated;
 
 class SchedulingGA
 {
@@ -35,6 +36,31 @@ class SchedulingGA
         $timeslot = 1; //this variable has to be removed
 
         return $timeslot;
+    }
+
+    /**
+    * Get the PV energy generated for a day
+    *
+    */
+    public function getPV()
+    {
+        $energyPV = [];
+        $m = 0;
+        $day = Carbon::now()->format('Y-m-d');
+        $PV = PowerGenerated::select('1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24')
+                        ->where('date', $day)->get();
+                        
+        // Generate a vector with 120 values 
+        for ($i=1; $i < 25; $i++) { 
+            $hourlyPV = $PV[0][$i];
+
+            // PV energy for each timeslot
+            for ($j=1; $j < 6; $j++) { 
+                $energyPV[$m] = $hourlyPV / 5;
+                $m++;
+            }
+        }
+        return $energyPV;
     }
 
     /**
@@ -78,6 +104,9 @@ class SchedulingGA
         $energyCost = $this->getEnergyCost();
         $schedule->setEnergyCost($energyCost);
 
+        $energyPV = $this->getPV();
+        $schedule->setEnergyCost($energyPV);
+
         return $schedule;
     }
 
@@ -111,7 +140,7 @@ class SchedulingGA
     
             $fittest = $population->getFittest(0);
     
-            print "Generation: " . $generation . "(" . $fittest->getFitness() . ") Generations maintained: " . $maintainedGenerations;
+            print "Generation: " . $generation . "(" . $fittest->getFitness() . ") Stall Generations: " . $maintainedGenerations;
             print "\n";
     
             // Apply crossover

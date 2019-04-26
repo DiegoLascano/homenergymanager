@@ -1,0 +1,29 @@
+.sidebar {
+  background-image: linear-gradient(0deg, #486581, #243B53)
+  // background-image: linear-gradient(90deg, #486581, #334E68)
+}
+
+@screen md{
+    .sidebar{
+        @apply w-64;
+    }
+}
+
+.sidebar-item{
+    @apply pl-5 py-4;
+}
+.sidebar-item.active{
+    @apply bg-grey-900;
+}
+.active > a{
+    @apply text-cyan-400;
+}
+
+.sidebar-link{
+    @apply no-underline text-grey-050;
+}
+.sidebar-item:hover > .sidebar-link{
+    @apply text-cyan-400;
+}
+
+

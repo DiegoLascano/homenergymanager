@@ -127,7 +127,7 @@ class GeneticAlgorithm
             $la = $appliance->length_operation;
 
             $start = $individual->getChromosome()[$i];
-            $finish = $start + $la - 1;
+            $finish = $start + $la;
 
             // This section is for the DTR summation
             if (($start > $alpha) && ($finish < $beta)) {
@@ -161,10 +161,15 @@ class GeneticAlgorithm
             for ($count=0; $count < $schedule->getAppliancesCount(); $count++) { 
                 $pscd[$n] =  $pscd[$n] + $consumptionMatrix[$count][$n];
             }
+            $netPscd = $pscd[$n] - $schedule->getEnergyPV()[$n];
+            if ($netPscd < 0)$netPscd = 0;
+            
             if (($pscd[$n] >= 0) && ($pscd[$n] <= $cu)) {
-                $sumEnergia[$n] = $pscd[$n] * $schedule->getEnergyCost()[$n];
+                // $sumEnergia[$n] = $pscd[$n] * $schedule->getEnergyCost()[$n];
+                $sumEnergia[$n] = $netPscd * $schedule->getEnergyCost()[$n];
             }elseif ($pscd[$n] > $cu) {
-                $sumEnergia[$n] = $lambda * $pscd[$n] * $schedule->getEnergyCost()[$n];
+                // $sumEnergia[$n] = $lambda * $pscd[$n] * $schedule->getEnergyCost()[$n];
+                $sumEnergia[$n] = $lambda * $netPscd * $schedule->getEnergyCost()[$n];
             }
 
             $denCost[$n] = $schedule->getEnergyCost()[$n] * array_sum($maxConsumption);

@@ -1,8 +1,12 @@
 @extends('layouts.app')
 
+@section('sidebar')
+    {{-- @parent --}}
+@endsection
+
 @section('content')
-<div class="min-h-screen">
-    <div class="form-box">
+<div class="my-auto">
+    <div class="form-box mx-auto">
         <p class="text-cyan-800 text-center text-md font-bold mb-4 uppercase">Login Form</p>
         <form method="POST" action="{{ route('login') }}">
             @csrf
@@ -24,11 +28,11 @@
                 </label>
                 <input name="password" class="input-box focus:border-cyan-600" id="password" type="password" placeholder="******************" required>
             </div>
-            <div class="flex items-center justify-between">
+            <div class="flex flex-wrap items-center justify-between">
                 <button class="btn btn-outline" type="submit">
                     Sign In
                 </button>
-                <a class="inline-block align-baseline font-bold text-sm text-cyan-600 hover:text-cyan-900" href="#">
+                <a class="inline-block align-baseline font-bold text-sm text-cyan-600 hover:text-cyan-900 mt-2 md:mt-0" href="#">
                     Forgot Password?
                 </a>
             </div>

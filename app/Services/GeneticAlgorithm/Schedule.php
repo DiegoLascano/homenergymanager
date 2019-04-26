@@ -12,6 +12,13 @@ class Schedule
     private $energyCost;
 
     /**
+     * Hourly PV energy generated
+     *
+     * @var array
+     */
+    private $energyPV;
+
+    /**
      * Appliances indexed by their IDs
      *
      * @var array
@@ -41,6 +48,7 @@ class Schedule
     {
         $this->appliances = [];
         $this->energyCost = [];
+        $this->energyPV = [];
         $this->appliancesCount = 0;
         $this->timeSlots = $timeSlots;
     }
@@ -63,6 +71,16 @@ class Schedule
     public function setEnergyCost($energyCost)
     {
         return $this->energyCost = $energyCost;
+    }
+
+    /**
+    * Set the energy cost array for a given day
+    *
+    * @param array $energyPV
+    */
+    public function setEnergyPV($energyPV)
+    {
+        return $this->energyPV = $energyPV;
     }
 
     /**
@@ -92,6 +110,16 @@ class Schedule
     public function getEnergyCost()
     {
         return $this->energyCost;
+    }
+
+    /**
+    * Gets the PV energy generated
+    *
+    * @param array $energyCost
+    */
+    public function getEnergyPV()
+    {
+        return $this->energyPV;
     }
 
     /**
