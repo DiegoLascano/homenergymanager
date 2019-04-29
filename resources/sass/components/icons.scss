@@ -45,7 +45,9 @@
 .icon-user-circle > g > .secondary{
     fill: #F0F4F8;
 }
-// .icon-cheveron-down:hover > .secondary{
+
+// Arrow down icon
+// .icon-cheveron-down > .secondary{
 //     fill: #14919B;
 // }
 .user-name:hover{
@@ -82,4 +84,8 @@
 }
 .sidebar-list > li:hover > a > svg > .secondary{
     fill: #fff;
+}
+
+.icon-calendar > .primary {
+    fill: #38BEC9;
 }

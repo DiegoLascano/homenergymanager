@@ -1,0 +1,18 @@
+.authentication-link {
+    @apply text-grey-600 no-underline tracking-xwide uppercase text-xs font-semibold mx-2 px-2 py-1;
+}
+  
+.authentication-link:hover{
+    @apply text-cyan-600;
+}
+
+.user-name > div > .is-Active{
+    // @apply bg-red;
+    // Arrow down icon
+    .icon-cheveron-down > .secondary{
+        fill: #14919B;
+    }
+    .icon-user-circle > g > .primary{
+        fill: #14919B;
+    }
+}

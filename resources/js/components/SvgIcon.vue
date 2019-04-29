@@ -1,6 +1,5 @@
 <template>  
-    <div class="inline-block" v-html="require('!!html-loader!./../../svg/' + this.icon + '.svg')"></div>
-    <!-- <div class="inline-block" v-html="require('icon-' + this.icon + '.svg')"></div> -->
+    <div class="inline-block" v-html="require('!!html-loader!./../../svg/' + this.icon + '.svg')" v-once></div>
 </template>
 
 <script>  
@@ -8,9 +7,15 @@ export default {
     props: ['icon'],
 
     mounted() {
-        this.$el.firstChild.classList.add(this.$style.svg)
-        this.$el.firstChild.removeAttribute('height')
-        this.$el.firstChild.removeAttribute('width')
+        // these are the original code lines
+        // this.$el.firstChild.classList.add(this.$style.svg)
+        // this.$el.firstChild.removeAttribute('height')
+        // this.$el.firstChild.removeAttribute('width')
+
+        // these are edited code lines to accept classes
+        this.$el.removeAttribute('class');
+        this.$el.firstChild.classList.add(...this.$vnode.data.staticClass.split(' '));
+        this.$el.outerHTML = this.$el.innerHTML;
     }
 }
 </script>  
@@ -18,10 +23,10 @@ export default {
 <style module>  
 .svg {
     fill: currentColor;
-    height: 2em;
+    height: 1em;
     margin-top: -4px;
     vertical-align: middle;
-    width: 2em;
+    width: 1em;
 }
 
 </style>

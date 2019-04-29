@@ -21,7 +21,25 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
-<body>
-    {{ asset('/resources/svg/icon-launch.svg') }}
+<body class="bg-grey-700">
+    <div id="app">
+        {{-- <ul class="list-reset">
+            <li>
+                <sidebar-item icon="icon-application" name="application" :selected="true">application</sidebar-item>
+            </li>
+            <li>
+                <sidebar-item class="text-grey-900" icon="icon-dashboard" name="dashboard">dashboard</sidebar-item>
+            </li>
+            <li>
+                <sidebar-item icon="icon-calendar" name="calendar">calendar</sidebar-item>
+            </li>
+        </ul> --}}
+        <sidebar-list>
+                <sidebar-item icon="icon-application" name="application" :selected="true">application</sidebar-item>
+                <sidebar-item class="text-grey-900" icon="icon-dashboard" name="dashboard">dashboard</sidebar-item>
+                <sidebar-item icon="icon-calendar" name="calendar">calendar</sidebar-item>
+        </sidebar-list>
+        
+    </div>
 </body>
 </html>

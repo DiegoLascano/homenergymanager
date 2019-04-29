@@ -7,8 +7,8 @@
                     @svg('icon-dashboard', ['class' => 'icon-24 icon-dashboard -my-1 mr-3'])Dashboard
                 </a>
             </li>
-            <li class="sidebar-item {{Request::is('historico') ? 'active' : ''}}">
-                <a href="/dashboard" class="sidebar-link">
+            <li class="sidebar-item {{Request::is('historical') ? 'active' : ''}}">
+                <a href="/historical" class="sidebar-link">
                     @svg('icon-dashboard', ['class' => 'icon-24 icon-dashboard -my-1 mr-3'])Historico
                 </a>
             </li>
@@ -17,6 +17,21 @@
                     @svg('icon-dashboard', ['class' => 'icon-24 icon-dashboard -my-1 mr-3'])Trends
                 </a>
             </li>
+            <li class="sidebar-item {{Request::is('trends') ? 'active' : ''}}">
+                <svg-icon icon="icon-dots-horizontal" class="icon-24"></svg-icon>
+            </li>
+            <li class="sidebar-item {{Request::is('trends') ? 'active' : ''}}">
+                <a href="/dashboard" class="sidebar-link">
+                    <svg-icon icon="icon-calendar" class="icon-24 -my-1"></svg-icon>Prueba
+                </a>
+            </li>
+            <li class="sidebar-item {{Request::is('trends') ? 'active' : ''}}">
+                {{-- <a href="/dashboard" class="sidebar-link">
+                    <svg-icon icon="icon-calendar" class="icon-24 -my-1"></svg-icon>Prueba
+                </a> --}}
+                <sidebar-item icon="icon-dashboard" name="Dashboard">Dashboard</sidebar-item>
+            </li>
+            
         </ul>
     </aside>
 @show

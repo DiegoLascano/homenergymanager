@@ -28,13 +28,19 @@ window.Vue = require('vue');
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
-Vue.component('card-component', require('./components/Cards/Card.vue').default);
 Vue.component('line-graph', require('./components/Graphs/LineGraph.vue').default);
 Vue.component('cost-graph', require('./components/Graphs/CostGraph.vue').default);
 Vue.component('pv-graph', require('./components/Graphs/PVGraph.vue').default);
 Vue.component('consumption-graph', require('./components/Graphs/ConsumptionGraph.vue').default);
-Vue.component('dropdown-button', require('./components/DropdownButton.vue').default);
+Vue.component('user-control', require('./components/UserControlButton.vue').default);
 Vue.component('sidebar-button', require('./components/SidebarButton.vue').default);
+Vue.component('svg-icon', require('./components/SvgIcon.vue').default);
+Vue.component('sidebar-item', require('./components/Sidebar/SidebarItem.vue').default);
+// Vue.component('sidebar-list', require('./components/Sidebar/SidebarList.vue').default);
+Vue.component('main-header', require('./components/MainSection/MainHeader.vue').default);
+Vue.component('tab-header', require('./components/MainSection/TabHeader.vue').default);
+Vue.component('tab-content', require('./components/MainSection/TabContent.vue').default);
+Vue.component('daily-average', require('./components/Cards/DailyCard.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -44,86 +50,3 @@ Vue.component('sidebar-button', require('./components/SidebarButton.vue').defaul
 const app = new Vue({
     el: '#app',
 });
-// var app = new Vue({
-//     el: '#root1',
-//     data: {
-//         newName: '',
-//         names: ['Uno', 'Dos']
-//     },
-//     mounted(){
-//         console.log('mounted')
-//     },
-//     methods: {
-//         addName() {
-//             this.names.push(this.newName);
-//             this.newName = '';
-//         }
-//     }
-// });
-
-// const dropdownTest = new Vue({
-//     el: '#dropdown-test',
-//     components: {
-//         'dropdown-component': dropdown,
-//     },
-//     data: {
-//         count: 0,
-//         activeInstrument: 'Piano',
-//         instruments: [
-//             'Piano',
-//             'Acoustic Guitar',
-//             'Drums',
-//             'Trumpet'
-//         ]
-//     },
-//     methods: {
-//         changeInstrument: function(instrument) {
-//             this.activeInstrument = instrument;
-//         }
-//     }
-// });
-
-// const vm = new Vue({
-//     el: '#components-demo',
-//     components: {
-//         'button-counter': buttonCounter,
-//         'dropdown2-component': dropdown,
-//     },
-//     data: {
-//         count: 0,
-//         activeInstrument: 'Piano',
-//         instruments: [
-//             'Piano',
-//             'Acoustic Guitar',
-//             'Drums',
-//             'Trumpet'
-//         ]
-//     },
-//     methods: {
-//         changeInstrument: function(instrument) {
-//             this.activeInstrument = instrument;
-//         }
-//     }
-// });
-
-
-// const vm = new Vue({
-//     el: '#dropdown',
-//     components: {
-//         'dropdown2-component': dropdown,
-//     },
-//     data: {
-// 		activeInstrument: 'Piano',
-// 		instruments: [
-// 			'Piano',
-// 			'Acoustic Guitar',
-// 			'Drums',
-// 			'Trumpet'
-// 		]
-// 	},
-// 	methods: {
-// 		changeInstrument: function(instrument) {
-// 			this.activeInstrument = instrument;
-// 		}
-// 	}
-// })

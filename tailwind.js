@@ -568,6 +568,7 @@ module.exports = {
     '24': '6rem',
     '32': '8rem',
     '48': '12rem',
+    '56': '14rem', //user added for calendar input
     '64': '16rem',
     '1/2': '50%',
     '1/3': '33.33333%',

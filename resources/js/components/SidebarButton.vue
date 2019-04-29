@@ -24,12 +24,12 @@ export default {
         }
     },
     mounted(){
-        console.log(this.icon)
+        // console.log(this.icon)
     },
     methods: {
         toggleShow(){
             this.showMenu = !this.showMenu;
-            console.log(this.showMenu);
+            // console.log(this.showMenu);
         },
     },
 }

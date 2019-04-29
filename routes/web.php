@@ -33,6 +33,7 @@ Auth::routes();
 
 Route::get('/dashboard', 'TabsController@dashboard')->name('dashboard');
 Route::get('/graphs', 'TabsController@graphs')->name('graphs');
+Route::get('/historical', 'TabsController@historical')->name('historical');
 
 Route::get('/api/getEnergyCost', 'grabData@getEnergyCost')->name('getEnergyCost');
 Route::get('/api/getPV', 'grabData@getPV')->name('getPV');

@@ -35,4 +35,14 @@ class TabsController extends Controller
     {
         return view('graphs');
     }
+
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function historical()
+    {
+        return view('pages.historical');
+    }
 }

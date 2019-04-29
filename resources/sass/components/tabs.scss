@@ -1,0 +1,15 @@
+.tab-name{
+    @apply  p-4 text-sm uppercase tracking-xwide border-b
+}
+@screen md{
+    .tab-name{
+        @apply  flex-1 text-center
+    }
+}
+
+.is-active.tab-name > a{
+    @apply text-cyan-600
+}
+.is-active.tab-name{
+    @apply border-cyan-600
+}
