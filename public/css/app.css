@@ -8677,6 +8677,10 @@ body {
   max-width: 900px;
 }
 
+.datepicker-container .vdp-datepicker {
+  position: static;
+}
+
 @media (min-width: 576px) {
   .sm\:list-reset {
     list-style: none;

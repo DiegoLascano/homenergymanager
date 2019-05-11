@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-{{-- Este layout es para probar el diseño responsive usando Tailwind CSS --}}
     <main class="bg-grey-050 md:flex-1 p-3">
         <div class="flex justify-between items-center mb-4">
             <div class="flex flex-col font-sans text-grey-700 p-3">
@@ -31,8 +30,7 @@
             <div class="w-full lg:w-2/3 rounded-sm p-3">
                 <div class="m-auto">
                     <div class="graph-container bg-white rounded-md">
-                        {{-- <consumption-graph url="/api/getSchedule" day="1"></consumption-graph>
-                        <cost-graph url="/api/getEnergyCost" day="1"></cost-graph> --}}
+                        <realtime-graph url="/api/getRealtimeData"></realtime-graph>
                     </div>
                 </div>
             </div>

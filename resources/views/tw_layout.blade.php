@@ -23,6 +23,7 @@
 </head>
 <body class="bg-grey-700">
     <div id="app">
+        <h1>Testing Broadcasting</h1>
         {{-- <ul class="list-reset">
             <li>
                 <sidebar-item icon="icon-application" name="application" :selected="true">application</sidebar-item>
@@ -34,11 +35,11 @@
                 <sidebar-item icon="icon-calendar" name="calendar">calendar</sidebar-item>
             </li>
         </ul> --}}
-        <sidebar-list>
+        {{-- <sidebar-list>
                 <sidebar-item icon="icon-application" name="application" :selected="true">application</sidebar-item>
                 <sidebar-item class="text-grey-900" icon="icon-dashboard" name="dashboard">dashboard</sidebar-item>
                 <sidebar-item icon="icon-calendar" name="calendar">calendar</sidebar-item>
-        </sidebar-list>
+        </sidebar-list> --}}
         
     </div>
 </body>

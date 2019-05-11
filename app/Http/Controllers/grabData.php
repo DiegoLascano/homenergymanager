@@ -33,7 +33,7 @@ class grabData extends Controller
         ];
         return $properties;
     } */
-    
+
     /**
     * Prepare energy cost data for the graph
     *
@@ -90,18 +90,21 @@ class grabData extends Controller
     */
     public function getPV()
     {
-        $day1 = request('day1') ?: 1;
-        if (request()->has('day2')) {
-            $day2 = request('day2') ?: 2;
-        }
+        $today = Carbon::today()->format('Y-m-d');
+        $date = request('date') ?: $today;
+
+        // dd($date);
+
+        // if (request()->has('day2')) {
+        //     $day2 = request('day2') ?: 2;
+        // }
 
         // $properties = $this->getGraphProperties();
 
-        // $today = Carbon::today()->format('Y-m-d');
-        $data[0] = PowerGenerated::where('id', $day1)->get();
-        if (isset($day2)) {
-            $data[1] = PowerGenerated::where('id', $day2)->get();
-        }
+        $data[0] = PowerGenerated::where('date', $date)->get();
+        // if (isset($day2)) {
+        //     $data[1] = PowerGenerated::where('id', $day2)->get();
+        // }
 
         $pvArray = [];
         $datasets = [];
@@ -185,8 +188,8 @@ class grabData extends Controller
         $chromosome = Schedule::latest()->first()['chromosome'];
         $schedule = explode(",", $chromosome);
 
-        $energyCost = $this->getEnergyCostGA();
-        $energyPV = $this->getPVGA();
+        $energyCost = $this->getEnergyCostGA(); //get energy cost of today
+        $energyPV = $this->getPVGA(); //get pv generated (SAM data) of today
 
         $appliances = Appliance::where('status', '0')->get();
         $appliancesCount = count($appliances);
@@ -228,6 +231,7 @@ class grabData extends Controller
         for ($i = 0; $i < $lastTimeslot; $i++) { 
             $hourlySumPV += $sumEnergiaPV[$i];
             $hourlySumNoPV += $sumEnergia[$i];
+            // cada 5 timeslots totaliza la suma de 1 hora
             if ((($i+1) % 5) == 0) {
                 $hourlyPV[$j] = $hourlySumPV;
                 $hourlyNoPV[$j] = $hourlySumNoPV;
@@ -250,4 +254,16 @@ class grabData extends Controller
         return $consumption;
     }
 
+    /**
+    * Prepare energy cost data for the realtime graph
+    *
+    * @return collection $energyCost Variable that includes labels and datasets
+    */
+    public function getRealtimeData()
+    {
+        $consumption = $this->getSchedule();
+        $consumption['datasets'][0]['label'] = 'Pronóstico';
+        $consumption['datasets'][1]['label'] = 'Real';
+        return $consumption;
+    }
 }

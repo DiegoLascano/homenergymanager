@@ -58,15 +58,15 @@
                         steppedLine: true,
                         data: data.datasets[0].data
                     }, 
-                    // {
-                    //     label: data.datasets[1].label,
-                    //     backgroundColor: 'rgba(241, 147, 194, 0.2)',
-                    //     borderColor: 'rgba(218, 73, 145, 1)',
-                    //     pointBackgroundColor: 'rgba(241, 147, 194, 0.1)',
-                    //     pointBorderColor: 'rgba(195, 44, 120, 1)',
-                    //     steppedLine: true,
-                    //     data: data.datasets[1].data
-                    // }
+                    {
+                        label: data.datasets[1].label,
+                        backgroundColor: 'rgba(241, 147, 194, 0.2)',
+                        borderColor: 'rgba(218, 73, 145, 1)',
+                        pointBackgroundColor: 'rgba(241, 147, 194, 0.1)',
+                        pointBorderColor: 'rgba(195, 44, 120, 1)',
+                        steppedLine: true,
+                        data: data.datasets[1].data
+                    }
                 ]
             }
         },

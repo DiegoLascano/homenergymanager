@@ -27,6 +27,8 @@
     },
     "dependencies": {
         "chart.js": "^2.8.0",
+        "laravel-echo": "^1.5.3",
+        "pusher-js": "^4.4.0",
         "vue-chartjs": "^3.4.2",
         "vuejs-datepicker": "^1.5.4"
     }

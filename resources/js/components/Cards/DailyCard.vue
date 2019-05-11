@@ -13,8 +13,8 @@
                 </div>
             </div>
             <div class="flex items-center w-1/2">
-                <div class="text-red-600 text-xs mx-auto text-center">
-                    <p class="bg-red-100 rounded-full py-1 px-2">+2,85%</p>
+                <div :class="badge.textColor" class="text-xs mx-auto text-center">
+                    <p :class="badge.backgroundColor" class="rounded-full py-1 px-2 font-semibold">{{ badge.value }}</p>
                 </div>
             </div>
         </div>
@@ -33,5 +33,21 @@ export default {
         title: '',
         url: '',
     },
+
+    data() {
+        return {
+            badge: {
+                backgroundColor: 'bg-cyan-100',
+                textColor: 'text-cyan-600',
+                value: '+2.56 %',
+            }
+        }
+    },
+
+    methods: {
+        updateBadge(){
+            // edit the badge options properly
+        }
+    }
 }
 </script>

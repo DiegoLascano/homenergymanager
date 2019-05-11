@@ -10,6 +10,7 @@ use App\Prcu;
 use App\Services\GeneticAlgorithm\SchedulingGA;
 use App\Services\GeneticAlgorithm\FitnessFunction;
 use App\PowerGenerated;
+use App\Events\PvUpdated;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,6 +24,8 @@ use App\PowerGenerated;
 */
 
 Route::get('/prueba', function () {
+    PvUpdated::dispatch(1);
+    // event(new PvUpdated);
     return view('tw_layout');
 });
 Route::get('/', function () {
@@ -34,10 +37,14 @@ Auth::routes();
 Route::get('/dashboard', 'TabsController@dashboard')->name('dashboard');
 Route::get('/graphs', 'TabsController@graphs')->name('graphs');
 Route::get('/historical', 'TabsController@historical')->name('historical');
+Route::get('/pvreal', function(){
+    return view('pages.pvreal');
+});
 
 Route::get('/api/getEnergyCost', 'grabData@getEnergyCost')->name('getEnergyCost');
 Route::get('/api/getPV', 'grabData@getPV')->name('getPV');
 Route::get('/api/getSchedule', 'grabData@getSchedule')->name('getSchedule');
+Route::get('/api/getRealtimeData', 'grabData@getRealtimeData')->name('getRealtimeData');
 
 Route::get('/ga', function() {
     /* $energyPV = [];

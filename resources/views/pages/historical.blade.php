@@ -19,7 +19,7 @@
                     </div>
                     <div class="md:flex items-center">
                         {{-- <cost-graph class="md:w-2/3 md:mx-auto" url="/api/getSchedule" day="1"></cost-graph> --}}
-                        <pv-graph class="md:w-2/3 md:mx-auto" url="/api/getPV" day="1"></pv-graph>
+                        <pv-graph class="md:w-2/3 md:mx-auto shadow-md" url="/api/getPV"></pv-graph>
                     </div>
                 </tab-content>
                 <tab-content name="Energy">

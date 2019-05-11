@@ -6,13 +6,13 @@
                 <p class = "text-md">Datos Historicos</p>
             </div>
             <div class="flex flex-col">
-                <div class="flex flex-1 font-sans text-lg text-grey-700 p-3">
+                <div class="datepicker-container flex flex-1 font-sans text-lg text-grey-700 p-3">
                     <datepicker :disabledDates = "datepicker.disabledDates" 
                                 v-model = "datepicker.date"
                                 :open-date = "datepicker.date" 
                                 input-class = "w-full md:w-56 rounded p-1 text-sm text-grey-700 text-center" 
                                 calendar-class = "shadow-lg text-sm md:-ml-10"
-                                @input = "dateChanged" 
+                                @input = "reload" 
                                 wrapper-class = "flex-1">
                     </datepicker>
                     <div class = "ml-3">
@@ -59,8 +59,9 @@ export default {
     },
 
     methods: {
-        dateChanged(){
-            this.selectedDate = this.datepicker.date
+        reload(){
+            // this.selectedDate = this.datepicker.date
+            this.$eventBus.$emit('reload-components', this.datepicker.date)
         }
     }
 }

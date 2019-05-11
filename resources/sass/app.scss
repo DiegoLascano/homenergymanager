@@ -99,3 +99,8 @@ body {
 .graph-container{
   max-width: 900px;
 }
+
+// para que datepicker no aparezca sobre topbar
+.datepicker-container .vdp-datepicker{
+  position: static;
+}
