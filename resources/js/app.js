@@ -44,6 +44,9 @@ Vue.component('main-header', require('./components/MainSection/MainHeader.vue').
 Vue.component('tab-header', require('./components/MainSection/TabHeader.vue').default);
 Vue.component('tab-content', require('./components/MainSection/TabContent.vue').default);
 Vue.component('daily-average', require('./components/Cards/DailyCard.vue').default);
+Vue.component('daily-cost', require('./components/Cards/DailyCost.vue').default);
+
+Vue.component('flash-message', require('./components/FlashMessage.vue').default);
 
 Vue.component('pv-input', require('./components/PVreal/pvInput.vue').default);
  

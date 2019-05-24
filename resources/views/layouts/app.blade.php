@@ -23,10 +23,11 @@
     <div id="app" class="flex flex-col min-h-screen">
         <header class="fixed w-full">
             @include('partials.topbar')
+            <flash-message></flash-message>
         </header>
         <div class="md:flex md:flex-1 mt-16">
             @include('partials.sidebar')
-            <main class="flex-1 flex flex-col justify-between {{Request::is('login', 'register') ? 'md:ml-0' : 'md:ml-64'}}">
+            <main class="flex-1 flex flex-col justify-between {{Request::is('login', 'register', 'dailyPV', 'appliances', 'appliances/create', 'schedules') ? 'md:ml-0' : 'md:ml-64'}}">
                 @yield('content')
                 @include('partials.footer')
             </main>

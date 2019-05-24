@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Events\ScheduleRequested;
 use App\Jobs\SendScheduleGeneratedNotification;
 use App\Events\ScheduleGenerated;
+use App\Schedule;
 
 class SchedulesController extends Controller
 {
@@ -14,7 +15,7 @@ class SchedulesController extends Controller
     */
     public function __construct()
     {
-        $this->middleware(['auth'])->only(['store']);
+        $this->middleware(['auth'])->only(['index', 'store']);
     }
 
     /**
@@ -24,6 +25,9 @@ class SchedulesController extends Controller
      */
     public function index()
     {
+        $schedules = auth()->user()->schedules;
+        // dd($schedules);  
+        return view('schedules.index', compact('schedules'));
         // $message = ['name' => 'Diego', 'lastname' => 'Lascano'];
         // event(new ScheduleGenerated($message));
         // dispatch(new SendScheduleGeneratedNotification)->delay(now()->addSeconds(5));
@@ -37,7 +41,7 @@ class SchedulesController extends Controller
      */
     public function create()
     {
-        //
+        return 'Create';
     }
 
     /**
@@ -55,7 +59,7 @@ class SchedulesController extends Controller
         // dd($schedule);
         event(new ScheduleRequested($schedule));
 
-        return "Schedule is being generated";
+        return redirect()->back()->with('message', 'Schedule is being generated');
     }
 
     /**

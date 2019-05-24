@@ -8,9 +8,14 @@
             <svg-icon icon="icon-cheveron-down" class="icon-24 icon-cheveron-down -my-1 mr-1"></svg-icon>
         </button>
         <div v-show="showMenu" class="menu">
-            <a v-for="item in items" @click.prevent="logout" v-bind:href="url" class="menu-link">
-                {{ item }}
-            </a>
+            <ul class="list-reset">
+                <li v-for="item in items" v-bind:key="item.id" class="menu-link">
+                    <a v-bind:href="item.route" class="menu-text no-underline text-grey-600 text-sm">{{ item.name }}</a>
+                </li>
+                <li class="menu-link border-t">
+                    <a class="menu-text no-underline text-grey-600 text-sm" :href="logoutRoute" @click.prevent="logout">Logout</a>
+                </li>
+            </ul>
         </div>
     </div>
 </template>
@@ -23,27 +28,49 @@ export default {
         SvgIcon,
     },
     props:{
-        items: [],
         url: '',
         icon: '',
     },
     data(){
         return{
             showMenu: false,
+            logoutRoute: 'http://homenergymanager.test/logout',
+            items: [],
         }
     },
     mounted(){
-        // console.log('Dropdown Button Mounted')
+        // console.log(this.url)
+        this.load()
     },
+
     methods: {
         toggleShow(){
             this.showMenu = !this.showMenu;
             // console.log(this.showMenu);  
         },
+
         logout(){
             document.getElementById('logout-form').submit();
-        }
+        },
+
+        load(){
+            this.fetchData()
+                .then(response => {
+                    this.fillData(response.data);
+                });
+        },
+
+        fetchData () {
+            return axios.get(this.url)
+        },
+
+        fillData(data) {
+            Object.keys(data).forEach(key => {
+                this.items[key]= data[key];
+            })
+            // console.log(this.items)
     },
+        }
 }
 </script>
 
@@ -54,9 +81,10 @@ export default {
     }
 
     .menu-link{
-        @apply text-sm font-thin tracking-wide text-grey-700 p-2 no-underline;
+        @apply text-sm font-thin tracking-wide text-grey-700 px-3 py-2 no-underline;
     }
-    .menu-link:hover{
+    
+    .menu-text:hover{
         @apply text-cyan-600;
     }
 </style>

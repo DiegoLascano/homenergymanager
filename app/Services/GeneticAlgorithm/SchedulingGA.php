@@ -105,7 +105,7 @@ class SchedulingGA
         $schedule->setEnergyCost($energyCost);
 
         $energyPV = $this->getPV();
-        $schedule->setEnergyCost($energyPV);
+        $schedule->setEnergyPV($energyPV);
 
         return $schedule;
     }
@@ -133,14 +133,14 @@ class SchedulingGA
         // This variables are used to verify minimization 
         $minimo = 1000;
         $bestGen = $generation;
-        $maintainedGenerations = 0;
+        $stallGenerations = 0;
 
-        while (!$algorithm->isTerminationConditionMet($maintainedGenerations)
+        while (!$algorithm->isTerminationConditionMet($stallGenerations)
                 && !$algorithm->isGenerationsMaxedOut($generation, $maxGenerations)) {
     
             $fittest = $population->getFittest(0);
     
-            print "Generation: " . $generation . "(" . $fittest->getFitness() . ") Stall Generations: " . $maintainedGenerations;
+            print "Generation: " . $generation . "(" . $fittest->getFitness() . ") Stall Generations: " . $stallGenerations;
             print "\n";
     
             // Apply crossover
@@ -152,13 +152,13 @@ class SchedulingGA
             // Evaluate Population
             $algorithm->evaluatePopulation($population, $schedule);
 
-            // Prepare termination condition
+            // Generate termination condition
             $fitness = $population->getFittest(0)->getFitness();
             if($fitness < $minimo){
                 $minimo = $fitness;
                 $bestGen = $generation;
             }
-            $maintainedGenerations = $generation - $bestGen;
+            $stallGenerations = $generation - $bestGen;
 
             // Increment current generation
             $generation++;

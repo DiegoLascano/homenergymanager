@@ -619,6 +619,22 @@ table {
   fill: #334e68;
 }
 
+.icon-battery-full > .primary {
+  fill: #9fb3c8;
+}
+
+.icon-battery-full > .secondary {
+  fill: #147d64;
+}
+
+.icon-battery-half > .primary {
+  fill: #9fb3c8;
+}
+
+.icon-battery-half > .secondary {
+  fill: #147d64;
+}
+
 .icon-light > .primary {
   fill: #c99a2e;
 }
@@ -627,11 +643,11 @@ table {
   fill: #243b53;
 }
 
-.icon-euro > .primary {
+.icon-currency-euro > .primary {
   fill: #243b53;
 }
 
-.icon-euro > .secondary {
+.icon-currency-euro > .secondary {
   fill: #c99a2e;
 }
 
@@ -788,6 +804,19 @@ table {
 .btn-outline:hover {
   background-color: #14919b;
   border-color: #14919b;
+  color: #fff;
+}
+
+.btn-danger-outline {
+  background-color: #fff;
+  border-width: 1px;
+  border-color: #d64545;
+  color: #d64545;
+}
+
+.btn-danger-outline:hover {
+  background-color: #d64545;
+  border-color: #d64545;
   color: #fff;
 }
 

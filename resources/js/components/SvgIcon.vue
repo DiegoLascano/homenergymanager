@@ -1,10 +1,11 @@
 <template>  
+    <!-- <div v-html="require('!!html-loader!./../../svg/' + this.icon + '.svg')" v-once></div> -->
     <div class="inline-block" v-html="require('!!html-loader!./../../svg/' + this.icon + '.svg')" v-once></div>
 </template>
 
 <script>  
 export default {  
-    props: ['icon'],
+    props: ['icon', 'addClass'],
 
     mounted() {
         // these are the original code lines

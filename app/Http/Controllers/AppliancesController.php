@@ -53,10 +53,12 @@ class AppliancesController extends Controller
             'length_operation' => 'required',
             'power_kWh' => 'required',
         ]);
-        
+
+        // $inicio = explode(":", $attributes['start_oti'])[0];
+        // dd($inicio*5);
         // convert hours to absolute timeSlots
-        $attributes['start_oti'] *= 5;
-        $attributes['finish_oti'] *= 5;
+        $attributes['start_oti'] = 5 * explode(":", $attributes['start_oti'])[0];
+        $attributes['finish_oti'] = 5 * explode(":", $attributes['finish_oti'])[0];;
         $timeSlots = $attributes['length_operation'];
         $attributes['length_operation'] = ceil($timeSlots / 12);
 
@@ -73,9 +75,9 @@ class AppliancesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Appliance $appliance)
     {
-        //
+        return view('appliances.show', compact('appliance'));
     }
 
     /**
@@ -84,9 +86,9 @@ class AppliancesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Appliance $appliance)
     {
-        //
+        return view('appliances.edit', compact('appliance'));
     }
 
     /**
@@ -96,9 +98,24 @@ class AppliancesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Appliance $appliance)
     {
-        //
+        $attributes = request()->validate([
+            'name' => 'required',
+            'start_oti' => 'required',
+            'finish_oti' => 'required',
+            'length_operation' => 'required',
+            'power_kWh' => 'required',
+        ]);
+
+        $attributes['start_oti'] = 5 * explode(":", $attributes['start_oti'])[0];
+        $attributes['finish_oti'] = 5 * explode(":", $attributes['finish_oti'])[0];;
+        $lot = $attributes['length_operation'];
+        $attributes['length_operation'] = ceil($lot / 12);
+
+        $appliance->update($attributes);
+
+        return redirect('/appliances');
     }
 
     /**
@@ -107,8 +124,10 @@ class AppliancesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Appliance $appliance)
     {
-        //
+        $appliance->delete();
+
+        return redirect('/appliances');
     }
 }

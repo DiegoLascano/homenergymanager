@@ -11,6 +11,9 @@ use App\Services\GeneticAlgorithm\SchedulingGA;
 use App\Services\GeneticAlgorithm\FitnessFunction;
 use App\PowerGenerated;
 use App\Events\PvUpdated;
+use App\Events\FlashMessage;
+use App\Events\FlashMsg;
+use App\Events\FlaMsg;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,11 +26,7 @@ use App\Events\PvUpdated;
 |
 */
 
-Route::get('/prueba', function () {
-    PvUpdated::dispatch(1);
-    // event(new PvUpdated);
-    return view('tw_layout');
-});
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -41,29 +40,34 @@ Route::get('/pvreal', function(){
     return view('pages.pvreal');
 });
 
-Route::get('/api/getEnergyCost', 'grabData@getEnergyCost')->name('getEnergyCost');
-Route::get('/api/getPV', 'grabData@getPV')->name('getPV');
-Route::get('/api/getSchedule', 'grabData@getSchedule')->name('getSchedule');
-Route::get('/api/getRealtimeData', 'grabData@getRealtimeData')->name('getRealtimeData');
+Route::get('/api/energyCost', 'FetchDataAPI@energyCost')->name('energyCost');
+Route::get('/api/pvSim', 'FetchDataAPI@pvSim')->name('pvSim');
+Route::get('/api/schedule', 'FetchDataAPI@schedule')->name('schedule');
+Route::get('/api/realtimeData', 'FetchDataAPI@realtimeData')->name('realtimeData');
+
+/**
+ * Routes for small cards with daily values
+ */
+Route::get('/api/dailyAvg', 'FetchDataAPI@dailyAvg')->name('dailyAvg');
+Route::get('/api/estimatedCost', 'FetchDataAPI@estimatedCost')->name('estimatedCost');
+Route::get('/api/realCost', 'FetchDataAPI@realCost')->name('realCost');
+Route::get('/api/grossCost', 'FetchDataAPI@grossCost')->name('grossCost');
+Route::get('/api/consumedEnergy', 'FetchDataAPI@consumedEnergy')->name('consumedEnergy');
+Route::get('/api/pvRealUsed', 'FetchDataAPI@pvRealUsed')->name('pvRealUsed');
+Route::get('/api/pvSimUsed', 'FetchDataAPI@pvSimUsed')->name('pvSimUsed');
 
 Route::get('/ga', function() {
-    /* $energyPV = [];
-    $m = 0;
-    $day = Carbon::now()->format('Y-m-d');
-    $PV = PowerGenerated::select('1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24')
-                    ->where('date', $day)->get();
-                    
-    // Generate a vector with 120 values 
-    for ($i=1; $i < 25; $i++) { 
-        $hourlyPV = $PV[0][$i];
-        for ($j=1; $j < 6; $j++) { 
-            $energyPV[$m] = $hourlyPV;
-            $m++;
-        }
-    }
-    dd($energyPV); */
+    $title = 'info';
+    $message = 'Info message';
+    event(new FlashMessage($title, $message));
     return view('ga');
 })->name('ga');
+Route::get('/back', function () {
+    session()->flash('error', 'Success message');
+    session()->flash('type', 'error');
+    return redirect()->back();
+    // return redirect()->back()->with('message', 'Success message');
+});
 
 Route::get('ga/importData', function(){
     // IMPORT CSV FOR Prcu DATA
@@ -71,3 +75,17 @@ Route::get('ga/importData', function(){
 
 Route::resource('schedules', 'SchedulesController');
 Route::resource('appliances', 'AppliancesController');
+Route::resource('dailyPV', 'DailyPVController');
+
+Route::get('/api/userControl', function() {
+    $routes[0]['name'] = 'Dashboard';
+    $routes[0]['route'] = 'http://homenergymanager.test/dashboard';
+    $routes[1]['name'] = 'Appliances';
+    $routes[1]['route'] = 'http://homenergymanager.test/appliances';
+    $routes[2]['name'] = 'PV Control';
+    $routes[2]['route'] = 'http://homenergymanager.test/dailyPV';
+    $routes[3]['name'] = 'Schedules';
+    $routes[3]['route'] = 'http://homenergymanager.test/schedules';
+
+    return $routes;
+});

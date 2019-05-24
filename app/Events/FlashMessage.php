@@ -4,25 +4,25 @@ namespace App\Events;
 
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Broadcasting\PrivateChannel;
-use Illuminate\Broadcasting\PresenceChannel;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
-class PvUpdated implements ShouldBroadcast
+class FlashMessage implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $pvUpdated;
+    public $title;
+    public $message;
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct($pvUpdated)
+    public function __construct($title, $message)
     {
-        $this->pvUpdated = $pvUpdated;
+        $this->title = $title;
+        $this->message = $message;
     }
 
     /**
@@ -32,7 +32,6 @@ class PvUpdated implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new Channel('pv-updated');
-        // return new PrivateChannel('channel-name');
+        return new Channel('flash-message');
     }
 }

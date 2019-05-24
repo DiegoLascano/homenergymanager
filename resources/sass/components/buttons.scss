@@ -18,3 +18,12 @@
     @apply bg-cyan-600 border-cyan-600 text-white;
     // @apply bg-cyan-200 border-cyan-500 text-cyan-900;
 }
+
+.btn-danger-outline{
+    @apply bg-white border border-red-400 text-red-400;
+}
+
+.btn-danger-outline:hover{
+    @apply bg-red-400 border-red-400 text-white;
+    // @apply bg-cyan-200 border-cyan-500 text-cyan-900;
+}

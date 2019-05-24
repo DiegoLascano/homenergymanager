@@ -25,7 +25,8 @@
             </div>
             @else
                 <div class="user-name flex justify-center items-center mx-2 px-2 py-1">
-                    <user-control class="relative" url="{{ route('logout') }}" :items="['Sign Out']" icon="icon-user-circle">{{ Auth::user()->name }}</user-control>
+                    <user-control class="relative" url="/api/userControl" icon="icon-user-circle">{{ Auth::user()->name }}</user-control>
+                    {{-- <user-control class="relative" url="{{ route('logout') }}" :items="['Appliances', 'Sign Out']" icon="icon-user-circle">{{ Auth::user()->name }}</user-control> --}}
                 </div>
                 <div>
                     {{-- <a class="text-grey-900 no-underline hover:underline hover:text-grey lowercase" href="{{ route('logout') }}" onclick="event.preventDefault();

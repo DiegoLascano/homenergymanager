@@ -2,12 +2,15 @@
 
 namespace App\Events;
 
+use Illuminate\Broadcasting\Channel;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Foundation\Events\Dispatchable;
+use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
+use Illuminate\Broadcasting\InteractsWithSockets;
 
-class ScheduleRequested
+class ScheduleRequested implements ShouldBroadcast
 {
-    use Dispatchable, SerializesModels;
+    use Dispatchable, InteractsWithSockets, SerializesModels;
 
     public $schedule;
 
@@ -20,4 +23,14 @@ class ScheduleRequested
     {
         $this->schedule = $schedule;
     }
+
+    /**
+     * Get the channels the event should broadcast on.
+     *
+     * @return \Illuminate\Broadcasting\Channel|array
+     */
+    // public function broadcastOn()
+    // {
+    //     return new Channel('schedule-requested');
+    // }
 }

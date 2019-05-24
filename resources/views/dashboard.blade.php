@@ -7,13 +7,12 @@
                 <p class="text-2xl mb-3">Welcome back, Diego</p>
                 <p class="text-md">Datos Historicos</p>
             </div>
-            <div class="font-sans text-lg text-grey-700 p-3">
+            {{-- <div class="font-sans text-lg text-grey-700 p-3">
                 Date Picker
-                {{-- <dropdown-component></dropdown-component> --}}
-            </div>
+            </div> --}}
         </div>
         <div class="flex flex-wrap">
-            <div class="w-full sm:w-1/2 md:w-1/2 lg:w-1/4 p-3 mb-2">
+            {{-- <div class="w-full sm:w-1/2 md:w-1/2 lg:w-1/4 p-3 mb-2">
                 @include('cards.consumo')
             </div>
             <div class="w-full sm:w-1/2 md:w-1/2 lg:w-1/4 p-3 mb-2">
@@ -24,13 +23,31 @@
             </div>
             <div class="w-full sm:w-1/2 md:w-1/2 lg:w-1/4 p-3 mb-2">
                 @include('cards.facturado')
+            </div> --}}
+            <div class="w-full sm:w-1/2 md:w-1/2 lg:w-1/3 p-3 mb-2">
+                <daily-average icon="icon-currency-euro" url="/api/estimatedCost"></daily-average>
+            </div> 
+            <div class="w-full sm:w-1/2 md:w-1/2 lg:w-1/3 p-3 mb-2">
+                <daily-cost icon="icon-currency-euro" url="/api/realCost"></daily-cost>
+            </div>
+            <div class="w-full sm:w-1/2 md:w-1/2 lg:w-1/3 p-3 mb-2">
+                <daily-cost icon="icon-currency-euro" url="/api/grossCost"></daily-cost>
+            </div>
+            <div class="w-full sm:w-1/2 md:w-1/2 lg:w-1/3 p-3 mb-2">
+                <daily-average icon="icon-battery-half" url="/api/pvRealUsed"></daily-average>
+            </div>  
+            <div class="w-full sm:w-1/2 md:w-1/2 lg:w-1/3 p-3 mb-2">
+                <daily-cost icon="icon-battery-full" url="/api/pvSimUsed"></daily-cost>
+            </div>
+            <div class="w-full sm:w-1/2 md:w-1/2 lg:w-1/3 p-3 mb-2">
+                <daily-cost icon="icon-light" url="/api/consumedEnergy"></daily-cost>
             </div>
         </div>
         <div class="flex flex-wrap items-stretch w-full">
             <div class="w-full lg:w-2/3 rounded-sm p-3">
                 <div class="m-auto">
-                    <div class="graph-container bg-white rounded-md">
-                        <realtime-graph url="/api/getRealtimeData"></realtime-graph>
+                    <div class="graph-container">
+                        <realtime-graph url="/api/realtimeData"></realtime-graph>
                     </div>
                 </div>
             </div>

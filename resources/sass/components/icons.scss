@@ -22,6 +22,22 @@
     fill: #334E68;
 }
 
+// Battery full icon used in the brand-box
+.icon-battery-full >.primary{
+    fill: #9FB3C8;
+}
+.icon-battery-full > .secondary{
+    fill: #147D64;
+}
+
+// Battery half icon used in the brand-box
+.icon-battery-half >.primary{
+    fill: #9FB3C8;
+}
+.icon-battery-half > .secondary{
+    fill: #147D64;
+}
+
 // Light Bulb icon - active
 .icon-light > .primary{
     fill: #C99A2E;
@@ -31,10 +47,10 @@
 }
 
 // Euro icon - active
-.icon-euro > .primary{
+.icon-currency-euro > .primary{
     fill: #243B53;
 }
-.icon-euro > .secondary{
+.icon-currency-euro > .secondary{
     fill: #C99A2E;
 }
 

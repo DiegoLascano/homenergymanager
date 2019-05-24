@@ -8,18 +8,18 @@
                 <tab-content name="Cost" :selected="true">
                     <div class="flex flex-wrap">
                         <div class="w-full sm:w-1/2 md:w-1/2 lg:w-1/3 p-3 mb-2">
-                            <daily-average icon="icon-light" title="Energia consumida" url=""></daily-average>
+                            <daily-average icon="icon-light" title="Energía consumida" url=""></daily-average>
                         </div>
                         <div class="w-full sm:w-1/2 md:w-1/2 lg:w-1/3 p-3 mb-2">
-                            <daily-average icon="icon-battery-full" title="Energia generada" url=""></daily-average>
+                            <daily-average icon="icon-battery-full" title="Energía generada" url=""></daily-average>
                         </div>
                         <div class="w-full sm:w-1/2 md:w-1/2 lg:w-1/3 p-3 mb-2">
-                            <daily-average icon="icon-currency-euro" title="Energia ahorrada" url=""></daily-average>
+                            <daily-average icon="icon-currency-euro" title="Energía ahorrada" url=""></daily-average>
                         </div>
                     </div>
                     <div class="md:flex items-center">
-                        {{-- <cost-graph class="md:w-2/3 md:mx-auto" url="/api/getSchedule" day="1"></cost-graph> --}}
-                        <pv-graph class="md:w-2/3 md:mx-auto shadow-md" url="/api/getPV"></pv-graph>
+                        {{-- <cost-graph class="md:w-2/3 md:mx-auto" url="/api/schedule" day="1"></cost-graph> --}}
+                        <pv-graph class="md:w-2/3 md:mx-auto shadow-md" url="/api/pvSim"></pv-graph>
                     </div>
                 </tab-content>
                 <tab-content name="Energy">

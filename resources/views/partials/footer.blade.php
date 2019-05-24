@@ -2,7 +2,7 @@
     <div class="flex items-start text-center my-1 md:my-0">
         <a class="hover:text-cyan-600 no-underline text-grey-600" href="#">FAQ</a><span>&nbsp;&middot;&nbsp;</span>
         <a class="hover:text-cyan-600 no-underline text-grey-600" href="#">Soporte</a><span>&nbsp;&middot;&nbsp;</span>
-        <a class="hover:text-cyan-600 no-underline text-grey-600" href="#">Contactanos</a>
+        <a class="hover:text-cyan-600 no-underline text-grey-600" href="#">Contáctanos</a>
     </div>
     <a class="text-center my-1 md:my-0" href="#">
         @svg('icon-application', ['class' => 'icon-24 icon-application -my-1'])

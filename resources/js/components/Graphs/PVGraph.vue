@@ -1,13 +1,13 @@
-<template>
+<template> 
   <div>
-      <!-- <div class="flex justify-between p-2"> -->
-          <!-- <div>
+      <!-- <div class="flex justify-between p-2">
+          <div>
             <label>Primer día: </label>
             <select v-model="day1" @change="reload">
                 <option v-for="n in 365">{{ n }}</option>
             </select>
-          </div> -->
-          <!-- <div>
+          </div>
+          <div>
             <label v-text="selectedDate"></label>
           </div>
           <div>
@@ -15,8 +15,8 @@
             <select v-model="day2" @change="reload">
                 <option v-for="n in 365">{{ n }}</option>
             </select>
-          </div> -->
-      <!-- </div> -->
+          </div>
+      </div> -->
     <line-chart :height="200" :chart-data="chartData" :options="chartOptions"></line-chart>
   </div>
 </template>

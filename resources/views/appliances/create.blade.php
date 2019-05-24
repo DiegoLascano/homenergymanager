@@ -1,15 +1,18 @@
 @extends('layouts.app')
 
+@section('sidebar')
+    {{-- @parent --}}
+@endsection
+
 @section('content')
-<div class="container">
+{{-- <div class="container">
     <div class="min-h-screen md:flex">
         <aside class="bg-blue flex-no-shrink p-3">
             <p>Side bar side bar</p>
-        </aside>
-        <main class="p-3 md:flex-1">
-            <div class="form-box">
+        </aside> --}}
+        <div class="md:flex items-center flex-1">
+            <div class="form-box mx-auto my-3">
                 <p class="text-cyan-800 text-center text-md font-bold uppercase mb-4">Add Appliances</p>
-            
                 <form method="POST" action="/appliances">
                     @csrf
                     <div class="flex flex-wrap -mx-3 mb-6">
@@ -35,7 +38,7 @@
                             <div class="relative">
                                 <select name="start_oti" class="input-box" id="grid-state">
                                     @for ($i = 1; $i < 25; $i++)
-                                        <option>{{$i}}</option>
+                                        <option>{{$i}}:00</option>
                                     @endfor
                                 </select>
                                 <div class="pointer-events-none absolute pin-y pin-r flex items-center px-2 text-grey-darker">
@@ -50,7 +53,7 @@
                             <div class="relative">
                                 <select name="finish_oti" class="input-box" id="grid-state">
                                     @for ($i = 1; $i < 25; $i++)
-                                        <option>{{$i}}</option>
+                                        <option>{{$i}}:00</option>
                                     @endfor
                                 </select>
                                 <div class="pointer-events-none absolute pin-y pin-r flex items-center px-2 text-grey-darker">
@@ -70,7 +73,7 @@
                         <button class="btn btn-outline" type="submit">
                             Aceptar
                         </button>
-                        <a class="inline-block align-baseline font-bold text-sm text-cyan-600 hover:text-cyan-900 no-underline hover:underline" href="#">
+                        <a class="inline-block align-baseline font-bold text-sm text-cyan-600 hover:text-cyan-900 no-underline hover:underline" href="/appliances">
                             Cancel
                         </a>
                     </div>
@@ -78,7 +81,7 @@
             
                 @include('partials.errors')
             </div>
-        </main>
-    </div>
-</div>
+        </div>
+    {{-- </div>
+</div> --}}
 @endsection

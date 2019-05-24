@@ -1,19 +1,19 @@
 <template>
-  <div>
-      <!-- <div class="flex justify-between p-2">
+  <div class="bg-white rounded-md shadow-md">
+      <div class="flex justify-between p-2 border-b border-grey-300 mb-2">
           <div>
-            <label>Primer día: </label>
-            <select v-model="day1" @change="reload">
+            <label class="font-semibold text-xs tracking-xwide text-grey-600 ml-2">Consumo de energía </label>
+            <!-- <select v-model="day1" @change="reload">
                 <option v-for="n in 365">{{ n }}</option>
-            </select>
+            </select> -->
           </div>
           <div>
-            <label>Segundo día: </label>
-            <select v-model="day2" @change="reload">
+            <label class="font-semibold text-xs tracking-xwide text-grey-600">{{ today }} </label>
+            <!-- <select v-model="day2" @change="reload">
                 <option v-for="n in 365">{{ n }}</option>
-            </select>
+            </select> -->
           </div>
-      </div> -->
+      </div>
     <line-chart :height="200" :chart-data="chartData" :options="chartOptions"></line-chart>
   </div>
 </template>
@@ -28,15 +28,20 @@
     //     day2: {default:50}
     // },
 
-    // data(){
-    //     return{
+    data(){
+        return{
+            today: new Date(),
+        }
+    },
 
-    //     }
-    // },
-
-    // created(){
-    //     window.Echo.channel()
-    // },
+    created(){
+        window.Echo.channel('pv-updated')
+            .listen('PvUpdated', event => {
+                console.log('graph updated')
+                this.reload()
+            });
+        this.formatDate();
+    },
     
     computed: {
         chartOptions() {
@@ -44,7 +49,7 @@
                 responsive: true,
                 maintainAspectRatios: false,
                 title: {
-                    display: true,
+                    display: false,
                     text: 'Consumo de Energía Planificada',
                     fontSize: 16,
                     fontFamily: "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
@@ -89,10 +94,12 @@
                 tooltips: {
                     enabled: true,
                     callbacks: {
+                        title: ((tooltipItems, data) => {
+                            return tooltipItems[0].label + ':00 h'
+                        }),
                         label: ((tooltipItems, data) => {
-                        // console.log(this)
-                        return tooltipItems.yLabel + ' ¢ / kWh'
-                        })
+                            return parseFloat(Math.round(tooltipItems.value * 100) / 100).toFixed(2) + ' ¢ / kWh'
+                        }),
                     }
                 }
             }
@@ -109,6 +116,17 @@
         //         }
         //     })
         // },
+        formatDate() {
+            const monthNames = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
+                "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
+                ];
+            var year = this.today.getYear() + 1900;
+            var month = this.today.getMonth();
+            var day = this.today.getDate();
+
+            this.today = day+' de '+monthNames[month]+' de '+year;
+            return
+        }
     }
   }
 </script>

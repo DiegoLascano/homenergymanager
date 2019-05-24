@@ -116,7 +116,7 @@ class GeneticAlgorithm
         $p = 5; //variable para la sumatoria DTR
         $cu = 0.4; //thresshold of electrical energy consumed
         $lambda = 1.4423;
-        $weightEnergyCost = 0.5; //weight for the energy cost
+        $weightEnergyCost = 0.8; //weight for the energy cost
         $weightDTR = 1- $weightEnergyCost; //weight for the DTR (delay time rate)
         $i = 0;
         
