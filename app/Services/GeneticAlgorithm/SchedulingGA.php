@@ -8,6 +8,7 @@ use App\Appliance as ApplianceModel;
 use Carbon\Carbon;
 use App\Prcu;
 use App\PowerGenerated;
+use App\Events\FlashMessage;
 
 class SchedulingGA
 {
@@ -175,8 +176,9 @@ class SchedulingGA
             'generations' => $generation,
             'status' => 'COMPLETED'
         ]);
+        event(new FlashMessage('success', 'New schedule generated successfully'));
         // event(new ScheduleGenerated($bestSolution));
 
-        dump($bestSolution);
+        // dump($bestSolution);
     }
 }

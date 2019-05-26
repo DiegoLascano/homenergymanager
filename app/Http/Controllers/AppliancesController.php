@@ -21,8 +21,9 @@ class AppliancesController extends Controller
      */
     public function index()
     {
-        $appliances = Appliance::where('owner_id', auth()->id())->get();
-        // dd($appliances);
+        // $appliances = Appliance::where('owner_id', auth()->id())->get();
+        $appliances = Appliance::where('owner_id', auth()->id())->simplePaginate(10);
+        // dd($appliances->links());
         // auth()->user()->appliances;
         return view('appliances.index', compact('appliances'));
     }

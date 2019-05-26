@@ -5,10 +5,14 @@
 @endsection
 
 @section('content')
-    <div class="md:w-3/4 lg:w-1/2 mx-auto overflow-x-auto bg-white my-2 border rounded-lg shadow-lg">
-        <div class="flex justify-between items-center">
-            <p class="text-cyan-800 text-center text-md font-bold uppercase p-4">Appliances</p>
-            <a class="btn btn-outline mr-4 no-underline" href="/appliances/create">Create New Application</a>
+<div class="my-auto">
+    <div class="md:w-3/4 lg:w-1/2 mx-auto overflow-x-auto bg-white my-2 md:my-0 border rounded-lg shadow-lg">
+        <div class="flex flex-col md:flex-row justify-between items-center">
+            <p class="text-cyan-800 text-center text-md font-bold uppercase p-1 md:p-4 mt-2">Appliances</p>
+            <div>
+                {{ $appliances->links() }}
+            </div>
+            <a class="btn btn-outline no-underline md:mr-4 p-1 px-3 my-2 mb-2" href="/appliances/create">Create New Application</a>
         </div>
         <table class="w-full">
             <tr>
@@ -33,6 +37,10 @@
                     <td class="border-b text-sm text-grey-darkest p-3 text-center">{{ $appliance->status }}</td>
                 </tr>
             @endforeach
+            {{-- <tr>
+                {{ $appliances->links() }}
+            </tr> --}}
         </table>
     </div>
+</div>
 @endsection

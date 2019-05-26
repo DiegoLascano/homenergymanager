@@ -853,6 +853,33 @@ table {
   color: #38bec9;
 }
 
+.pagination {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.page-item {
+  padding: .25rem;
+  border-color: #0a6c74;
+}
+
+.page-link {
+  font-size: .875rem;
+  color: #0a6c74;
+  text-decoration: none;
+}
+
+a.page-link:hover {
+  text-decoration: underline;
+}
+
+.pagination > .page-item > span {
+  opacity: .5;
+}
+
 /**
  * This injects all of Tailwind's utility classes, generated based on your
  * config file.

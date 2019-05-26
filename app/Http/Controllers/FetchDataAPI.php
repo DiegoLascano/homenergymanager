@@ -9,6 +9,7 @@ use App\PowerGenerated;
 use App\Schedule;
 use App\Appliance;
 use App\DailyPV;
+use App\Events\FlashMessage;
 
 class FetchDataAPI extends Controller
 {
@@ -35,6 +36,24 @@ class FetchDataAPI extends Controller
         return $properties;
     } */
 
+    /**
+    * Get today's schedule if exist
+    *
+    * @param Type $var var explanation
+    */
+    public function scheduleToday($date)
+    {
+        // $today = Carbon::now()->format('Y-m-d');
+        $chromosome = Schedule::whereDate('created_at', $date)->where('status', 'COMPLETED')->latest()->first()['chromosome'];
+        if (is_null($chromosome)) {
+            $title = 'error';
+            $message = 'No Schedule for today';
+            FlashMessage::dispatch($title, $message);
+            return null;
+        };
+        return $chromosome;
+    }
+    
     /**
     * Prepare energy cost data for the graph
     *
@@ -134,13 +153,16 @@ class FetchDataAPI extends Controller
     * Get the PV energy generated for a day
     *
     */
-    public function pvGA()
+    public function pvGA($date)
     {
         $energyPV = [];
         $m = 0;
-        $day = Carbon::now()->format('Y-m-d');
+
+        // if (is_null($date)) {
+        //     $date = Carbon::now()->format('Y-m-d');
+        // }
         $PV = PowerGenerated::select('1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24')
-                        ->where('date', $day)->get();
+                        ->where('date', $date)->get();
                         
         // Generate a vector with 120 values 
         for ($i=1; $i < 25; $i++) { 
@@ -158,13 +180,15 @@ class FetchDataAPI extends Controller
     * Get the PV energy generated REAL for today
     *
     */
-    public function pvReal()
+    public function pvReal($date)
     {
         $realPvGenerated = [];
         $m = 0;
-        $today = Carbon::now()->format('Y-m-d');
+        // if (is_null($date)) {
+        //     $date = Carbon::now()->format('Y-m-d');
+        // }
         $PV = DailyPV::select('1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24')
-                        ->where('date', $today)->get();
+                        ->where('date', $date)->get();
         // Generate a vector with 120 values 
         for ($i=1; $i < 25; $i++) { 
             $hourlyRealPV = $PV[0][$i];
@@ -182,13 +206,16 @@ class FetchDataAPI extends Controller
     * Get the cost of energy from DB for today Prcu
     *
     */
-    public function energyCostGA()
+    public function energyCostGA($date)
     {
         $energyCost = [];
         $m = 0;
-        $day = Carbon::now()->format('Y-m-d');
+        // if (is_null($date)) {
+        //     $date = Carbon::now()->format('Y-m-d');
+        // }
+        // dd($date);
         $costs = Prcu::select('1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24')
-                        ->where('date', $day)->get();
+                        ->where('date', $date)->get();
                         
         // Generate a vector with 120 values 
         for ($i=1; $i < 25; $i++) { 
@@ -209,7 +236,10 @@ class FetchDataAPI extends Controller
     */
     public function schedule()
     {
-        $chromosome = Schedule::latest()->first()['chromosome'];
+        $chromosome = $this->scheduleToday();
+        if (is_null($chromosome)) {
+            return null;
+        }
         $schedule = explode(",", $chromosome);
 
         $energyCost = $this->energyCostGA(); //get energy cost of today
@@ -289,13 +319,17 @@ class FetchDataAPI extends Controller
         // $consumption['datasets'][0]['label'] = 'Pronóstico';
         // $consumption['datasets'][1]['label'] = 'Real';
         // return $consumption;
-
-        $chromosome = Schedule::latest()->first()['chromosome']; // Aqui se debe seleccionar el Schedule para Carbon::now()
+        $today = Carbon::now()->format('Y-m-d');
+        $date = request('date') ?: $today;
+        $chromosome = $this->scheduleToday($date);
+        if (is_null($chromosome)) {
+            return null;
+        }
         $schedule = explode(",", $chromosome);
 
-        $energyCost = $this->energyCostGA(); //get energy cost of today
-        $energyPV = $this->pvGA(); //get pv generated (SAM data) of today
-        $realPvGenerated = $this->pvReal(); //get pv generated (REAL data) of today
+        $energyCost = $this->energyCostGA($date); //get energy cost of today
+        $energyPV = $this->pvGA($date); //get pv generated (SAM data) of today
+        $realPvGenerated = $this->pvReal($date); //get pv generated (REAL data) of today
 
         $appliances = Appliance::where('status', '0')->get();
         $appliancesCount = count($appliances);
@@ -363,21 +397,14 @@ class FetchDataAPI extends Controller
         return $consumption;
     }
 
+
     /**
-    * Generate daily values to show in cards
+    * Purpose of the function
     *
     * @param Type $var var explanation
     */
-    public function dailyAvg()
+    public function calculateDailyAvg($energyCost, $energyPV, $realPvGenerated, $appliances, $schedule)
     {
-        $chromosome = Schedule::latest()->first()['chromosome']; // Aqui se debe seleccionar el Schedule para Carbon::now()
-        $schedule = explode(",", $chromosome);
-
-        $energyCost = $this->energyCostGA(); //get energy cost of today
-        $energyPV = $this->pvGA(); //get pv generated (SAM data) of today
-        $realPvGenerated = $this->pvReal(); //get pv generated (REAL data) of today
-
-        $appliances = Appliance::where('status', '0')->get();
         $appliancesCount = count($appliances);
 
         $lastTimeslot = 120;
@@ -428,16 +455,45 @@ class FetchDataAPI extends Controller
         // dump($sumEnergiaPV); // Costo del consumo electrico de cargas con PV SAM
         // dump($sumEnergiaPVReal); // Costo del consumo electrico de cargas con PV real
         // dd($sumConsumo); // Costo del consumo electrico de cargas
-        $summary['pscd'] = array_sum($pscd);
-        $summary['costoBruto'] = array_sum($sumConsumo);
-        $summary['costoPvSim'] = array_sum($sumEnergiaPV);
-        $summary['costoPvReal'] = array_sum($sumEnergiaPVReal);
-        $summary['pvReal'] = array_sum($realPvGenerated);
-        $summary['pvExcedenteReal'] = $excedentePvReal;
-        $summary['pvEstimada'] = array_sum($energyPV);
-        $summary['pvExcedenteSim'] = $excedentePvSim;
+        $results['pscd'] = array_sum($pscd);
+        $results['costoBruto'] = array_sum($sumConsumo);
+        $results['costoPvSim'] = array_sum($sumEnergiaPV);
+        $results['costoPvReal'] = array_sum($sumEnergiaPVReal);
+        $results['pvReal'] = array_sum($realPvGenerated);
+        $results['pvExcedenteReal'] = $excedentePvReal;
+        $results['pvEstimada'] = array_sum($energyPV);
+        $results['pvExcedenteSim'] = $excedentePvSim;
 
-        return $summary;
+        return $results;
+    }
+
+
+    /**
+    * Generate daily values to show in cards
+    *
+    * @param Type $var var explanation
+    */
+    public function dailyAvg($date)
+    {
+        // $today = '2019-05-24';
+        // $chromosome = Schedule::latest()->first()['chromosome']; // Aqui se debe seleccionar el Schedule para Carbon::now()
+        $chromosome = $this->scheduleToday($date);
+        if (is_null($chromosome)) {
+            event(new FlashMessage('error', 'No schedule generated for this date'));
+            return null;
+        }
+        $schedule = explode(",", $chromosome);
+        // dd($schedule);
+        $energyCost = $this->energyCostGA($date); //get energy cost of today
+        $energyPV = $this->pvGA($date); //get pv generated (SAM data) of today
+        $realPvGenerated = $this->pvReal($date); //get pv generated (REAL data) of today
+
+        $appliances = Appliance::where('status', '0')->get();
+        // $appliancesCount = count($appliances);
+
+        $todaySummary = $this->calculateDailyAvg($energyCost, $energyPV, $realPvGenerated, $appliances, $schedule);
+
+        return $todaySummary;
     }
 
     /**
@@ -447,7 +503,9 @@ class FetchDataAPI extends Controller
     */
     public function grossCost()
     {
-        $summary = $this->dailyAvg();
+        $today = Carbon::now()->format('Y-m-d');
+        $date = request('date') ?: $today;
+        $summary = $this->dailyAvg($date);
         $dailyGrossCost['title'] = 'Costo Bruto';
         $dailyGrossCost['value'] = $summary['costoBruto'];
         
@@ -468,7 +526,9 @@ class FetchDataAPI extends Controller
     */
     public function realCost()
     {
-        $summary = $this->dailyAvg();
+        $today = Carbon::now()->format('Y-m-d');
+        $date = request('date') ?: $today;
+        $summary = $this->dailyAvg($date);
         $dailyRealCost['title'] = 'Costo real';
         $dailyRealCost['value'] = $summary['costoPvReal'];
         
@@ -489,7 +549,9 @@ class FetchDataAPI extends Controller
     */
     public function estimatedCost()
     {
-        $summary = $this->dailyAvg();
+        $today = Carbon::now()->format('Y-m-d');
+        $date = request('date') ?: $today;
+        $summary = $this->dailyAvg($date);
         $dailySimCost['title'] = 'Costo estimado';
         $dailySimCost['value'] = $summary['costoPvSim'];
         
@@ -510,7 +572,9 @@ class FetchDataAPI extends Controller
     */
     public function consumedEnergy()
     {
-        $summary = $this->dailyAvg();
+        $today = Carbon::now()->format('Y-m-d');
+        $date = request('date') ?: $today;
+        $summary = $this->dailyAvg($date);
         $dailyConsumedEnergy['title'] = 'Energía consumida';
         $dailyConsumedEnergy['value'] = $summary['pscd'];
 
@@ -526,7 +590,9 @@ class FetchDataAPI extends Controller
     */
     public function pvSimUsed()
     {
-        $summary = $this->dailyAvg();
+        $today = Carbon::now()->format('Y-m-d');
+        $date = request('date') ?: $today;
+        $summary = $this->dailyAvg($date);
         $dailyPvSimUsed['title'] = 'Energía PV estimada usada';
         $dailyPvSimUsed['value'] = $summary['pvEstimada'] - $summary['pvExcedenteSim'];
 
@@ -542,7 +608,9 @@ class FetchDataAPI extends Controller
     */
     public function pvRealUsed()
     {
-        $summary = $this->dailyAvg();
+        $today = Carbon::now()->format('Y-m-d');
+        $date = request('date') ?: $today;
+        $summary = $this->dailyAvg($date);
         $dailyPvRealUsed['title'] = 'Energía PV real usada';
         $dailyPvRealUsed['value'] = $summary['pvReal'] - $summary['pvExcedenteReal'];
 

@@ -13,7 +13,7 @@ class GenerateSchedule implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    public $timeout = 120;
+    public $timeout = 180;
     protected $schedule;
 
     /**

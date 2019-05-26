@@ -7,6 +7,7 @@ use App\Events\ScheduleRequested;
 use App\Jobs\SendScheduleGeneratedNotification;
 use App\Events\ScheduleGenerated;
 use App\Schedule;
+use App\Events\FlashMessage;
 
 class SchedulesController extends Controller
 {
@@ -25,7 +26,10 @@ class SchedulesController extends Controller
      */
     public function index()
     {
-        $schedules = auth()->user()->schedules;
+        // $schedules = auth()->user()->schedules;
+        $schedules = Schedule::where('owner_id', auth()->id())->latest()->simplePaginate(10);
+
+        // $prueba = Schedule::simplePaginate(6);
         // dd($schedules);  
         return view('schedules.index', compact('schedules'));
         // $message = ['name' => 'Diego', 'lastname' => 'Lascano'];
@@ -57,6 +61,7 @@ class SchedulesController extends Controller
         $schedule = auth()->user()->schedules()->create($attributes);
         // dump($attributes);
         // dd($schedule);
+        event(new FlashMessage('info', 'A new Schedule is being generated'));
         event(new ScheduleRequested($schedule));
 
         return redirect()->back()->with('message', 'Schedule is being generated');

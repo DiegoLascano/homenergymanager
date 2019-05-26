@@ -25,22 +25,22 @@
                 @include('cards.facturado')
             </div> --}}
             <div class="w-full sm:w-1/2 md:w-1/2 lg:w-1/3 p-3 mb-2">
-                <daily-average icon="icon-currency-euro" url="/api/estimatedCost"></daily-average>
+                <daily-card icon="icon-currency-euro" url="/api/estimatedCost"></daily-card>
             </div> 
             <div class="w-full sm:w-1/2 md:w-1/2 lg:w-1/3 p-3 mb-2">
-                <daily-cost icon="icon-currency-euro" url="/api/realCost"></daily-cost>
+                <daily-card icon="icon-currency-euro" url="/api/realCost"></daily-card>
             </div>
             <div class="w-full sm:w-1/2 md:w-1/2 lg:w-1/3 p-3 mb-2">
-                <daily-cost icon="icon-currency-euro" url="/api/grossCost"></daily-cost>
+                <daily-card icon="icon-currency-euro" url="/api/grossCost"></daily-card>
             </div>
             <div class="w-full sm:w-1/2 md:w-1/2 lg:w-1/3 p-3 mb-2">
-                <daily-average icon="icon-battery-half" url="/api/pvRealUsed"></daily-average>
+                <daily-card icon="icon-battery-half" url="/api/pvRealUsed"></daily-card>
             </div>  
             <div class="w-full sm:w-1/2 md:w-1/2 lg:w-1/3 p-3 mb-2">
-                <daily-cost icon="icon-battery-full" url="/api/pvSimUsed"></daily-cost>
+                <daily-card icon="icon-battery-full" url="/api/pvSimUsed"></daily-card>
             </div>
             <div class="w-full sm:w-1/2 md:w-1/2 lg:w-1/3 p-3 mb-2">
-                <daily-cost icon="icon-light" url="/api/consumedEnergy"></daily-cost>
+                <daily-card icon="icon-light" url="/api/consumedEnergy"></daily-card>
             </div>
         </div>
         <div class="flex flex-wrap items-stretch w-full">

@@ -34,7 +34,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/dashboard', 'TabsController@dashboard')->name('dashboard');
-Route::get('/graphs', 'TabsController@graphs')->name('graphs');
+Route::get('/trends', 'TabsController@trends')->name('trends');
 Route::get('/historical', 'TabsController@historical')->name('historical');
 Route::get('/pvreal', function(){
     return view('pages.pvreal');
@@ -49,16 +49,18 @@ Route::get('/api/realtimeData', 'FetchDataAPI@realtimeData')->name('realtimeData
  * Routes for small cards with daily values
  */
 Route::get('/api/dailyAvg', 'FetchDataAPI@dailyAvg')->name('dailyAvg');
+// Route::get('/api/historicalAvg', 'FetchDataAPI@historicalAvg')->name('historicalAvg');
 Route::get('/api/estimatedCost', 'FetchDataAPI@estimatedCost')->name('estimatedCost');
 Route::get('/api/realCost', 'FetchDataAPI@realCost')->name('realCost');
 Route::get('/api/grossCost', 'FetchDataAPI@grossCost')->name('grossCost');
+// Route::get('/api/historicalGrossCost', 'FetchDataAPI@historicalGrossCost')->name('historicalGrossCost');
 Route::get('/api/consumedEnergy', 'FetchDataAPI@consumedEnergy')->name('consumedEnergy');
 Route::get('/api/pvRealUsed', 'FetchDataAPI@pvRealUsed')->name('pvRealUsed');
 Route::get('/api/pvSimUsed', 'FetchDataAPI@pvSimUsed')->name('pvSimUsed');
 
 Route::get('/ga', function() {
-    $title = 'info';
-    $message = 'Info message';
+    $title = 'success';
+    $message = 'New schedule generated successfully';
     event(new FlashMessage($title, $message));
     return view('ga');
 })->name('ga');

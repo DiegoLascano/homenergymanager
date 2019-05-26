@@ -8,13 +8,13 @@
                 <tab-content name="Cost" :selected="true">
                     <div class="flex flex-wrap">
                         <div class="w-full sm:w-1/2 md:w-1/2 lg:w-1/3 p-3 mb-2">
-                            <daily-average icon="icon-light" title="Energía consumida" url=""></daily-average>
+                            <historical-card icon="icon-currency-euro" url="/api/estimatedCost"></historical-card>
                         </div>
                         <div class="w-full sm:w-1/2 md:w-1/2 lg:w-1/3 p-3 mb-2">
-                            <daily-average icon="icon-battery-full" title="Energía generada" url=""></daily-average>
+                            <historical-card icon="icon-currency-euro" url="/api/realCost"></historical-card>
                         </div>
                         <div class="w-full sm:w-1/2 md:w-1/2 lg:w-1/3 p-3 mb-2">
-                            <daily-average icon="icon-currency-euro" title="Energía ahorrada" url=""></daily-average>
+                            <historical-card icon="icon-currency-euro" url="/api/grossCost"></historical-card>
                         </div>
                     </div>
                     <div class="md:flex items-center">
@@ -23,7 +23,21 @@
                     </div>
                 </tab-content>
                 <tab-content name="Energy">
-                    <h3  class="text-grey-700 text-sm font-thin">Here goes the content for Energy</h3>
+                    <div class="flex flex-wrap">
+                        <div class="w-full sm:w-1/2 md:w-1/2 lg:w-1/3 p-3 mb-2">
+                            <historical-card icon="icon-light" url="/api/consumedEnergy"></historical-card>
+                        </div>
+                        <div class="w-full sm:w-1/2 md:w-1/2 lg:w-1/3 p-3 mb-2">
+                            <historical-card icon="icon-battery-full" url="/api/pvRealUsed"></historical-card>
+                        </div>
+                        <div class="w-full sm:w-1/2 md:w-1/2 lg:w-1/3 p-3 mb-2">
+                            <historical-card icon="icon-currency-euro" url="/api/pvSimUsed"></historical-card>
+                        </div>
+                    </div>
+                    <div class="md:flex items-center">
+                        {{-- <cost-graph class="md:w-2/3 md:mx-auto" url="/api/schedule" day="1"></cost-graph> --}}
+                        <pv-graph class="md:w-2/3 md:mx-auto shadow-md" url="/api/pvSim"></pv-graph>
+                    </div>
                 </tab-content>
             </tab-header>
         </div>

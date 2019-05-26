@@ -1,0 +1,19 @@
+.pagination{
+    @apply list-reset flex items-center justify-start;
+}
+
+.page-item{
+    @apply p-1 border-cyan-800;
+}
+
+.page-link{
+    @apply text-sm text-cyan-800 no-underline;
+}
+
+a.page-link:hover{
+    @apply underline;
+}
+
+.pagination > .page-item > span{
+    @apply opacity-50 ;
+}

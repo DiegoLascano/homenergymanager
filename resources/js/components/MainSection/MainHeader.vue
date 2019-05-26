@@ -38,6 +38,7 @@ export default {
         return{
             datepicker: {
                 disabledDates: {
+                    to: new Date(2019, 3, 20),
                     from: new Date(), //today
                 },
                 date: new Date()

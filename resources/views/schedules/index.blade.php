@@ -5,12 +5,16 @@
 @endsection
 
 @section('content')
-    <div class="md:w-3/4 lg:w-1/2 mx-auto overflow-x-auto bg-white my-2 border rounded-lg shadow-lg">
-        <div class="flex justify-between items-center">
-            <p class="text-cyan-800 text-center text-md font-bold uppercase p-4">Schedules</p>
+<div class="my-auto">
+    <div class="md:w-3/4 lg:w-1/2 mx-auto overflow-x-auto bg-white my-2 md:my-0 border rounded-lg shadow-lg">
+        <div class="flex flex-col md:flex-row justify-between items-center">
+            <p class="text-cyan-800 text-center text-md font-bold uppercase p-1 md:p-4 mt-2">Schedules</p>
+            <div>
+                {{ $schedules->links() }}
+            </div>
             <form action="/schedules" method="POST">
                 @csrf
-                <button class="btn btn-outline mr-4 no-underline" type="submit">Create New Schedule</button>
+                <button class="btn btn-outline no-underline md:mr-4 p-1 px-3 my-2 mb-2" type="submit">Create New Schedule</button>
             </form>
         </div>
         <table class="w-full">
@@ -46,4 +50,5 @@
             @endforeach
         </table>
     </div>
+</div>
 @endsection

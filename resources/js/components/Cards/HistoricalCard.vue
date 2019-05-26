@@ -38,6 +38,7 @@ export default {
             title: 'no title',
             value: '0.0',
             unit: '',
+            selectedDate: new Date(),
             badge: {
                 backgroundColor: 'bg-cyan-100',
                 textColor: 'text-cyan-600',
@@ -46,11 +47,14 @@ export default {
         }
     },
 
-    created(){
-        window.Echo.channel('pv-updated')
-            .listen('PvUpdated', event => {
-                this.reload()
-            });
+    created() {
+        this.selectedDate.setDate(this.selectedDate.getDate()-1);
+        this.formatDate();
+        this.$eventBus.$on('reload-components', (data) => {
+            this.selectedDate = data
+            this.formatDate()
+            this.reload()
+        })
     },
 
     mounted(){
@@ -66,7 +70,11 @@ export default {
         },
 
         fetchData () {
-            return axios.get(this.url)
+            return axios.get(this.url, { 
+                params: {
+                    date: this.selectedDate,
+                }
+            })
         },
 
         fillCard(data){
@@ -74,15 +82,29 @@ export default {
                 this.title = 'No Data';
                 this.value = 'No Data';
                 this.unit = 'No Data';
-            } else {
+            }else{
                 this.title = data.title;
                 this.value = parseFloat(Math.round(data.value * 100) / 100).toFixed(2);
                 this.unit = data.unit;
-            }
+            };
         },
 
         reload(){
             this.load()
+        },
+
+        formatDate() {
+            var year = this.selectedDate.getYear() + 1900;
+            var month = this.selectedDate.getMonth() + 1;
+            var day = this.selectedDate.getDate();
+            if (month < 10){
+                month = '0' + month
+            }
+            if (day < 10){
+                day = '0' + day
+            }
+            this.selectedDate = year+'-'+month+'-'+day;
+            return
         }
     }
 }

@@ -23,7 +23,7 @@ class TabsController extends Controller
      */
     public function dashboard()
     {
-        return view('dashboard');
+        return view('pages.dashboard');
     }
 
     /**
@@ -31,9 +31,9 @@ class TabsController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function graphs()
+    public function trends()
     {
-        return view('graphs');
+        return view('pages.trends');
     }
 
     /**

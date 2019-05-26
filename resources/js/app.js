@@ -43,8 +43,9 @@ Vue.component('sidebar-item', require('./components/Sidebar/SidebarItem.vue').de
 Vue.component('main-header', require('./components/MainSection/MainHeader.vue').default);
 Vue.component('tab-header', require('./components/MainSection/TabHeader.vue').default);
 Vue.component('tab-content', require('./components/MainSection/TabContent.vue').default);
-Vue.component('daily-average', require('./components/Cards/DailyCard.vue').default);
-Vue.component('daily-cost', require('./components/Cards/DailyCost.vue').default);
+Vue.component('daily-card', require('./components/Cards/DailyCard.vue').default);
+Vue.component('historical-card', require('./components/Cards/HistoricalCard.vue').default);
+// Vue.component('daily-cost', require('./components/Cards/DailyCost.vue').default);
 
 Vue.component('flash-message', require('./components/FlashMessage.vue').default);
 
