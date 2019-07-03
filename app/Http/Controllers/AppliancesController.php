@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Appliance;
+use App\Events\FlashMessage;
 
 class AppliancesController extends Controller
 {
@@ -66,7 +67,7 @@ class AppliancesController extends Controller
         // dd($attributes);
 
         auth()->user()->appliances()->create($attributes);
-
+        event(new FlashMessage('success', 'Nuevo artefacto creado exitosamente'));
         return redirect('/appliances');
     }
 
@@ -107,6 +108,7 @@ class AppliancesController extends Controller
             'finish_oti' => 'required',
             'length_operation' => 'required',
             'power_kWh' => 'required',
+            'status' => 'required',
         ]);
 
         $attributes['start_oti'] = 5 * explode(":", $attributes['start_oti'])[0];
@@ -115,7 +117,7 @@ class AppliancesController extends Controller
         $attributes['length_operation'] = ceil($lot / 12);
 
         $appliance->update($attributes);
-
+        event(new FlashMessage('success', 'Artefacto actualizado correctamente'));
         return redirect('/appliances');
     }
 
@@ -128,7 +130,7 @@ class AppliancesController extends Controller
     public function destroy(Appliance $appliance)
     {
         $appliance->delete();
-
+        event(new FlashMessage('success', 'Artefacto eliminado correctamente'));
         return redirect('/appliances');
     }
 }

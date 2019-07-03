@@ -7,14 +7,14 @@
 @section('content')
 <div class="my-auto">
     <div class="form-box mx-auto">
-        <p class="text-cyan-800 text-center text-md font-bold mb-4 uppercase">Registration Form</p>
+        <p class="text-cyan-800 text-center text-md font-bold mb-4 uppercase">Crear cuenta</p>
         <form method="POST" action="{{ route('register') }}">
             @csrf
             <div class="mb-4">
                 <label class="label-text" for="name">
-                    Name
+                    Nombre
                 </label>
-                <input name="name" class="input-box" id="name" type="name" placeholder="Name" required>
+                <input name="name" class="input-box" id="name" type="name" placeholder="Nombre" required>
             </div>
             <div class="mb-4">
                 <label class="label-text" for="email">
@@ -24,22 +24,22 @@
             </div>
             <div class="mb-4">
                 <label class="label-text" for="password">
-                    Password
+                    Contraseña
                 </label>
                 <input name="password" class="input-box" id="password" type="password" placeholder="******************" required>
             </div>
             <div class="mb-6">
                 <label class="label-text" for="password_confirmation">
-                    Password Confirmation
+                    Confirmación de contraseña
                 </label>
                 <input name="password_confirmation" class="input-box" id="password_confirmation" type="password_confirmation" placeholder="******************" required>
             </div>
             <div class="flex flex-wrap items-center justify-between">
                 <button class="btn btn-primary" type="submit">
-                    Register
+                    Crear cuenta
                 </button>
                 <a class="inline-block align-baseline font-bold text-sm text-cyan-600 hover:text-cyan-900 mt-2 md:mt-0" href="/login">
-                    Already have an account?
+                    Ya tienes una cuenta?
                 </a>
             </div>
         </form>

@@ -1,6 +1,6 @@
 <template>
     <div>
-        <button @click="toggleShow" class="text-grey-700 no-underline tracking-wide text-sm block md:hidden hover:text-cyan-600">
+        <button @click="toggleSidebar" class="text-grey-700 no-underline tracking-wide text-sm block md:hidden hover:text-cyan-600">
             <slot></slot>
         </button>
         <!-- <div v-show="showMenu" class="menu">
@@ -20,15 +20,16 @@ export default {
     },
     data(){
         return{
-            showMenu: false,
+            // showMenu: false,
         }
     },
     mounted(){
         // console.log(this.icon)
     },
     methods: {
-        toggleShow(){
-            this.showMenu = !this.showMenu;
+        toggleSidebar(){
+            // this.showMenu = !this.showMenu;
+            this.$eventBus.$emit('toggle-sidebar', 'toggle')
             // console.log(this.showMenu);
         },
     },

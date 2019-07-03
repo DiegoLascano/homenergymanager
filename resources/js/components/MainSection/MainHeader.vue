@@ -1,16 +1,16 @@
 <template>
-    <div>
-        <div class = "md:flex justify-between items-end md:mb-4">
-            <div class = "flex flex-col font-sans text-grey-700 p-3">
-                <p class = "text-2xl mb-3">Welcome back, Diego</p>
-                <p class = "text-md">Datos Historicos</p>
+    <div class="my-3">
+        <div class = "md:flex justify-between items-end md:px-3">
+            <div class = "flex flex-col font-sans text-grey-700">
+                <p class = "text-2xl mb-3">{{ headerTitle }}</p>
+                <p class = "text-md">{{ headerMessage }}</p>
             </div>
-            <div class="flex flex-col">
-                <div class="datepicker-container flex flex-1 font-sans text-lg text-grey-700 p-3">
+            <div v-show="showCalendar" class="flex flex-col">
+                <div class="datepicker-container flex flex-1 font-sans text-lg text-grey-700 md:p-3 mt-3 md:mt-0">
                     <datepicker :disabledDates = "datepicker.disabledDates" 
                                 v-model = "datepicker.date"
                                 :open-date = "datepicker.date" 
-                                input-class = "w-full md:w-56 rounded p-1 text-sm text-grey-700 text-center" 
+                                input-class = "w-full md:w-56 rounded p-1 text-sm hover:text-white hover:bg-cyan-600 cursor-pointer text-grey-700 text-center" 
                                 calendar-class = "shadow-lg text-sm md:-ml-10"
                                 @input = "reload" 
                                 wrapper-class = "flex-1">
@@ -34,12 +34,18 @@ export default {
         SvgIcon
     },
 
+    props: {
+        headerTitle: '',
+        headerMessage: '',
+        showCalendar: { default:false },
+    },
+
     data(){
         return{
             datepicker: {
                 disabledDates: {
-                    to: new Date(2019, 3, 20),
                     from: new Date(), //today
+                    to: new Date(2019, 4, 31),
                 },
                 date: new Date()
             },

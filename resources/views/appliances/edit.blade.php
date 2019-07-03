@@ -1,13 +1,13 @@
 @extends('layouts.app')
 
 @section('sidebar')
-    
+    @parent
 @endsection
 
 @section('content')
 <div class="md:flex items-center flex-1">
         <div class="form-box mx-auto my-3">
-            <p class="text-cyan-800 text-center text-md font-bold uppercase mb-4">Edit Appliances</p>
+            <p class="text-cyan-800 text-center text-md font-bold uppercase mb-4">Editar Artefacto</p>
         
             <form method="POST" action="/appliances/{{ $appliance->id }}">
                 @method('PATCH')
@@ -15,14 +15,14 @@
                 <div class="flex flex-wrap -mx-3 mb-6">
                     <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
                         <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-first-name">
-                            name
+                            Nombre
                         </label>
                         <input name="name" class="input-box" id="grid-first-name" type="text" value="{{ $appliance->name }}">
                         {{-- <p class="text-red text-xs italic">Please fill out this field.</p> --}}
                     </div>
                     <div class="w-full md:w-1/2 px-3">
                         <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-last-name">
-                            power [kWh]
+                            Potencia [kW]
                         </label>
                         <input name="power_kWh" class="input-box" id="grid-last-name" type="text" value="{{ $appliance->power_kWh }}">
                     </div>
@@ -30,7 +30,7 @@
                 <div class="flex flex-wrap -mx-3 mb-6">
                     <div class="w-full md:w-1/4 px-3 mb-6 md:mb-0">
                         <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-state">
-                            start
+                            Inicio [h]
                         </label>
                         <div class="relative">
                             <select name="start_oti" class="input-box" id="grid-state">
@@ -49,7 +49,7 @@
                     </div>
                     <div class="w-full md:w-1/4 px-3 mb-6 md:mb-0">
                         <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-state">
-                            finish
+                            Fin [h]
                         </label>
                         <div class="relative">
                             <select name="finish_oti" class="input-box" id="grid-state">
@@ -66,20 +66,26 @@
                             </div>
                         </div>
                     </div>
-                    <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                    <div class="w-full md:w-1/4 px-3 mb-6 md:mb-0">
                         <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-zip">
-                            length of cycle [min]
+                            Duración [min]
                         </label>
                         <input name="length_operation" class="input-box" id="grid-zip" type="text" value="{{ $appliance->length_operation * 12 }}">
+                    </div>
+                    <div class="w-full md:w-1/4 px-3 mb-6 md:mb-0">
+                        <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-zip">
+                            Estado
+                        </label>
+                        <input name="status" class="input-box" id="grid-zip" type="text" value="{{ $appliance->status}}">
                     </div>
                 </div>
                 {{-- <button class="flex-no-shrink bg-teal hover:bg-teal-dark border-teal hover:border-teal-dark text-sm border-4 text-white mt-6 py-1 px-2 rounded" type="submit"> --}}
                 <div class="flex items-center justify-between">
                     <button class="btn btn-outline" type="submit">
-                        Update
+                        Actualizar
                     </button>
                     <a class="inline-block align-baseline font-bold text-sm text-cyan-600 hover:text-cyan-900 no-underline hover:underline" href="/appliances">
-                        Cancel
+                        Cancelar
                     </a>
                 </div>
             </form>

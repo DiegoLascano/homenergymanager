@@ -2,60 +2,43 @@
 
 @section('content')
     <main class="bg-grey-050 md:flex-1 p-3">
-        <div class="flex justify-between items-center mb-4">
-            <div class="flex flex-col font-sans text-grey-700 p-3">
-                <p class="text-2xl mb-3">Welcome back, Diego</p>
-                <p class="text-md">Datos Historicos</p>
-            </div>
-            {{-- <div class="font-sans text-lg text-grey-700 p-3">
-                Date Picker
-            </div> --}}
-        </div>
-        <div class="flex flex-wrap">
-            {{-- <div class="w-full sm:w-1/2 md:w-1/2 lg:w-1/4 p-3 mb-2">
-                @include('cards.consumo')
-            </div>
-            <div class="w-full sm:w-1/2 md:w-1/2 lg:w-1/4 p-3 mb-2">
-                @include('cards.facturado')
-            </div>
-            <div class="w-full sm:w-1/2 md:w-1/2 lg:w-1/4 p-3 mb-2">
-                @include('cards.facturado')
-            </div>
-            <div class="w-full sm:w-1/2 md:w-1/2 lg:w-1/4 p-3 mb-2">
-                @include('cards.facturado')
-            </div> --}}
-            <div class="w-full sm:w-1/2 md:w-1/2 lg:w-1/3 p-3 mb-2">
-                <daily-card icon="icon-currency-euro" url="/api/estimatedCost"></daily-card>
-            </div> 
-            <div class="w-full sm:w-1/2 md:w-1/2 lg:w-1/3 p-3 mb-2">
-                <daily-card icon="icon-currency-euro" url="/api/realCost"></daily-card>
-            </div>
-            <div class="w-full sm:w-1/2 md:w-1/2 lg:w-1/3 p-3 mb-2">
-                <daily-card icon="icon-currency-euro" url="/api/grossCost"></daily-card>
-            </div>
-            <div class="w-full sm:w-1/2 md:w-1/2 lg:w-1/3 p-3 mb-2">
-                <daily-card icon="icon-battery-half" url="/api/pvRealUsed"></daily-card>
-            </div>  
-            <div class="w-full sm:w-1/2 md:w-1/2 lg:w-1/3 p-3 mb-2">
-                <daily-card icon="icon-battery-full" url="/api/pvSimUsed"></daily-card>
-            </div>
-            <div class="w-full sm:w-1/2 md:w-1/2 lg:w-1/3 p-3 mb-2">
-                <daily-card icon="icon-light" url="/api/consumedEnergy"></daily-card>
-            </div>
-        </div>
-        <div class="flex flex-wrap items-stretch w-full">
-            <div class="w-full lg:w-2/3 rounded-sm p-3">
-                <div class="m-auto">
-                    <div class="graph-container">
-                        <realtime-graph url="/api/realtimeData"></realtime-graph>
+        <main-header header-title="Bienvenido, {{ auth()->user()->name }}" header-message="Gestiona tu instalación"></main-header>
+
+        <div class="md:p-3">
+            <tab-header class="flex-1 bg-white">
+                <tab-content name="Costo" :selected="true">
+                    <div class="flex flex-wrap">
+                        <div class="w-full sm:w-1/2 md:w-1/2 lg:w-1/3 py-3 md:pr-3">
+                            <daily-cost icon="icon-currency-euro" url="/api/grossCost"></daily-cost>
+                        </div> 
+                        <div class="w-full sm:w-1/2 md:w-1/2 lg:w-1/3 md:p-3">
+                            <daily-cost icon="icon-currency-euro" url="/api/realCost"></daily-cost>
+                        </div>
+                        <div class="w-full sm:w-1/2 md:w-1/2 lg:w-1/3 py-3 md:pl-3">
+                            <daily-savings icon="icon-wallet" url="/api/costSavings"></daily-savings>
+                        </div>
                     </div>
-                </div>
-            </div>
-            <div class="w-full lg:w-1/3 rounded-sm p-3 m-auto">
-                <div class="bg-white">
-                    Table
-                </div>
-            </div>
+                    <div class="md:flex items-center">
+                        <realtime-graph class="md:w-2/3 md:mx-auto" title="Tendencia de costo [¢/kWh]" url="/api/realtimeCost"></realtime-graph>
+                    </div>
+                </tab-content>
+                <tab-content name="Energía">
+                    <div class="flex flex-wrap">
+                        <div class="w-full sm:w-1/2 md:w-1/2 lg:w-1/3 py-3 md:pr-3">
+                            <daily-energy icon="icon-light" url="/api/consumedEnergy"></daily-energy>
+                        </div>  
+                        <div class="w-full sm:w-1/2 md:w-1/2 lg:w-1/3 md:p-3">
+                            <daily-savings icon="icon-battery-half" url="/api/pvRealGenerated"></daily-savings>
+                        </div>
+                        <div class="w-full sm:w-1/2 md:w-1/2 lg:w-1/3 py-3 md:pl-3">
+                            <daily-savings icon="icon-battery-full" url="/api/energySavings"></daily-savings>
+                        </div>
+                    </div>
+                    <div class="md:flex items-center">
+                        <realtime-graph class="md:w-2/3 md:mx-auto" title="Tendencia de energía consumida [kWh]" url="/api/realtimeEnergy"></realtime-graph>
+                    </div>
+                </tab-content>
+            </tab-header>
         </div>
     </main>
 @endsection

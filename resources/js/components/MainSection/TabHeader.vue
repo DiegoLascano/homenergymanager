@@ -9,7 +9,8 @@
                 </li>
             </ul>
         </div>
-        <div class="tab-content p-2">
+        <div class="tab-content bg-grey-050">
+        <!-- <div class="tab-content p-2"> -->
             <slot></slot>
         </div>
     </div>

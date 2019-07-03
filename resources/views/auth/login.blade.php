@@ -7,7 +7,7 @@
 @section('content')
 <div class="my-auto">
     <div class="form-box mx-auto">
-        <p class="text-cyan-800 text-center text-md font-bold mb-4 uppercase">Login Form</p>
+        <p class="text-cyan-800 text-center text-md font-bold mb-4 uppercase">Iniciar sesión</p>
         <form method="POST" action="{{ route('login') }}">
             @csrf
             {{-- <div class="mb-4">
@@ -24,16 +24,16 @@
             </div>
             <div class="mb-6">
                 <label class="label-text" for="password">
-                    Password
+                    Contraseña
                 </label>
                 <input name="password" class="input-box focus:border-cyan-600" id="password" type="password" placeholder="******************" required>
             </div>
             <div class="flex flex-wrap items-center justify-between">
                 <button class="btn btn-outline" type="submit">
-                    Sign In
+                    Iniciar sesión
                 </button>
                 <a class="inline-block align-baseline font-bold text-sm text-cyan-600 hover:text-cyan-900 mt-2 md:mt-0" href="#">
-                    Forgot Password?
+                    Olvidaste tu contraseña?
                 </a>
             </div>
         </form>

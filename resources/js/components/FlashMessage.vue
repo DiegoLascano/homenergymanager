@@ -1,7 +1,7 @@
 <template>
     <div>
         <transition name="slide-fade">
-            <div v-show="showFlash" class="flash-box w-1/2 md:w-1/3 lg:w-1/4 px-3 py-2" @click="toggleShow" :class="[backgroundColor, textColor]">
+            <div v-show="showFlash" class="flash-box w-1/2 md:w-1/3 lg:w-1/4 px-3 py-2" @click="hide" :class="[backgroundColor, textColor]">
                 <!-- <h3 class=" text-xs uppercase tracking-wide p-1">{{ title }}</h3> -->
                 <p class="text-sm px-3 py-2">{{ message }}</p>
             </div>
@@ -27,7 +27,7 @@ export default {
             .listen('FlashMessage', event => {
                 // console.log(event)
                 this.fillData(event)
-                this.toggleShow();
+                this.show();
         });
     },
 
@@ -50,9 +50,13 @@ export default {
             }
         },
 
-        toggleShow(){
-            this.showFlash = !this.showFlash;
-        }
+        show(){
+            this.showFlash = true;
+        },
+
+        hide(){
+            this.showFlash = false;
+        },
     }
 }
 </script>

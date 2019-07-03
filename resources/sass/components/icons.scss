@@ -48,10 +48,20 @@
 
 // Euro icon - active
 .icon-currency-euro > .primary{
+    // fill: #9FB3C8;
     fill: #243B53;
 }
 .icon-currency-euro > .secondary{
+    // fill: #C99A2E;
     fill: #C99A2E;
+}
+
+// Wallet icon - active
+.icon-wallet > .primary{
+    fill: #C99A2E;
+}
+.icon-wallet > .secondary{
+    fill: #243B53;
 }
 
 // User icon

@@ -96,7 +96,7 @@ class SchedulingGA
         $timeSlots = $this->getCurrentTimeslot();
         $schedule = new Schedule($timeSlots);
 
-        $appliances = ApplianceModel::where('status', '0')->get();
+        $appliances = ApplianceModel::where('owner_id', $this->schedule->owner_id)->where('status', '0')->get();
         $schedule->setAppliances($appliances);
         
         $appliancesCount = count($appliances);
@@ -176,9 +176,9 @@ class SchedulingGA
             'generations' => $generation,
             'status' => 'COMPLETED'
         ]);
-        event(new FlashMessage('success', 'New schedule generated successfully'));
+        event(new FlashMessage('success', 'Nuevo cronograma generado exitosamente'));
         // event(new ScheduleGenerated($bestSolution));
 
-        // dump($bestSolution);
+        dump($bestSolution);
     }
 }

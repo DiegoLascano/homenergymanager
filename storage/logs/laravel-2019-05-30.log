@@ -1,0 +1,27 @@
+[2019-05-30 11:53:54] local.ERROR: The Pusher library requires the PHP cURL module. Please ensure it is installed {"exception":"[object] (Pusher\\PusherException(code: 0): The Pusher library requires the PHP cURL module. Please ensure it is installed at C:\\Users\\diego\\LaravelProyectos\\Homestead\\code\\homenergymanager\\vendor\\pusher\\pusher-php-server\\src\\Pusher.php:235)
+[stacktrace]
+#0 C:\\Users\\diego\\LaravelProyectos\\Homestead\\code\\homenergymanager\\vendor\\pusher\\pusher-php-server\\src\\Pusher.php(71): Pusher\\Pusher->check_compatibility()
+#1 C:\\Users\\diego\\LaravelProyectos\\Homestead\\code\\homenergymanager\\vendor\\laravel\\framework\\src\\Illuminate\\Broadcasting\\BroadcastManager.php(213): Pusher\\Pusher->__construct('7fcb2a6f7a1506a...', 'b97395cd09f05bd...', '777408', Array)
+#2 C:\\Users\\diego\\LaravelProyectos\\Homestead\\code\\homenergymanager\\vendor\\laravel\\framework\\src\\Illuminate\\Broadcasting\\BroadcastManager.php(189): Illuminate\\Broadcasting\\BroadcastManager->createPusherDriver(Array)
+#3 C:\\Users\\diego\\LaravelProyectos\\Homestead\\code\\homenergymanager\\vendor\\laravel\\framework\\src\\Illuminate\\Broadcasting\\BroadcastManager.php(164): Illuminate\\Broadcasting\\BroadcastManager->resolve('pusher')
+#4 C:\\Users\\diego\\LaravelProyectos\\Homestead\\code\\homenergymanager\\vendor\\laravel\\framework\\src\\Illuminate\\Broadcasting\\BroadcastManager.php(153): Illuminate\\Broadcasting\\BroadcastManager->get('pusher')
+#5 C:\\Users\\diego\\LaravelProyectos\\Homestead\\code\\homenergymanager\\vendor\\laravel\\framework\\src\\Illuminate\\Broadcasting\\BroadcastManager.php(319): Illuminate\\Broadcasting\\BroadcastManager->driver()
+#6 C:\\Users\\diego\\LaravelProyectos\\Homestead\\code\\homenergymanager\\vendor\\laravel\\framework\\src\\Illuminate\\Support\\Facades\\Facade.php(237): Illuminate\\Broadcasting\\BroadcastManager->__call('channel', Array)
+#7 C:\\Users\\diego\\LaravelProyectos\\Homestead\\code\\homenergymanager\outes\\channels.php(16): Illuminate\\Support\\Facades\\Facade::__callStatic('channel', Array)
+#8 C:\\Users\\diego\\LaravelProyectos\\Homestead\\code\\homenergymanager\\app\\Providers\\BroadcastServiceProvider.php(19): require('C:\\\\Users\\\\diego\\\\...')
+#9 [internal function]: App\\Providers\\BroadcastServiceProvider->boot()
+#10 C:\\Users\\diego\\LaravelProyectos\\Homestead\\code\\homenergymanager\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(29): call_user_func_array(Array, Array)
+#11 C:\\Users\\diego\\LaravelProyectos\\Homestead\\code\\homenergymanager\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(87): Illuminate\\Container\\BoundMethod::Illuminate\\Container\\{closure}()
+#12 C:\\Users\\diego\\LaravelProyectos\\Homestead\\code\\homenergymanager\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(31): Illuminate\\Container\\BoundMethod::callBoundMethod(Object(Illuminate\\Foundation\\Application), Array, Object(Closure))
+#13 C:\\Users\\diego\\LaravelProyectos\\Homestead\\code\\homenergymanager\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php(572): Illuminate\\Container\\BoundMethod::call(Object(Illuminate\\Foundation\\Application), Array, Array, NULL)
+#14 C:\\Users\\diego\\LaravelProyectos\\Homestead\\code\\homenergymanager\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(819): Illuminate\\Container\\Container->call(Array)
+#15 C:\\Users\\diego\\LaravelProyectos\\Homestead\\code\\homenergymanager\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(802): Illuminate\\Foundation\\Application->bootProvider(Object(App\\Providers\\BroadcastServiceProvider))
+#16 [internal function]: Illuminate\\Foundation\\Application->Illuminate\\Foundation\\{closure}(Object(App\\Providers\\BroadcastServiceProvider), 23)
+#17 C:\\Users\\diego\\LaravelProyectos\\Homestead\\code\\homenergymanager\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(803): array_walk(Array, Object(Closure))
+#18 C:\\Users\\diego\\LaravelProyectos\\Homestead\\code\\homenergymanager\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Bootstrap\\BootProviders.php(17): Illuminate\\Foundation\\Application->boot()
+#19 C:\\Users\\diego\\LaravelProyectos\\Homestead\\code\\homenergymanager\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(211): Illuminate\\Foundation\\Bootstrap\\BootProviders->bootstrap(Object(Illuminate\\Foundation\\Application))
+#20 C:\\Users\\diego\\LaravelProyectos\\Homestead\\code\\homenergymanager\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(297): Illuminate\\Foundation\\Application->bootstrapWith(Array)
+#21 C:\\Users\\diego\\LaravelProyectos\\Homestead\\code\\homenergymanager\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(120): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
+#22 C:\\Users\\diego\\LaravelProyectos\\Homestead\\code\\homenergymanager\\artisan(37): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#23 {main}
+"} 

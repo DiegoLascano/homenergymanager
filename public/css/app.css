@@ -651,6 +651,14 @@ table {
   fill: #c99a2e;
 }
 
+.icon-wallet > .primary {
+  fill: #c99a2e;
+}
+
+.icon-wallet > .secondary {
+  fill: #243b53;
+}
+
 .icon-user-circle > g > .primary {
   fill: #102a43;
 }
@@ -696,8 +704,8 @@ table {
 }
 
 .tab-name {
-  padding: 1rem;
-  font-size: .875rem;
+  padding: .5rem;
+  font-size: .75rem;
   text-transform: uppercase;
   letter-spacing: .1em;
   border-bottom-width: 1px;
@@ -705,8 +713,10 @@ table {
 
 @media (min-width: 768px) {
   .tab-name {
+    padding: 1rem;
     flex: 1 1 0%;
     text-align: center;
+    font-size: .875rem;
   }
 }
 
@@ -8307,6 +8317,14 @@ a.page-link:hover {
 
 .text-5xl {
   font-size: 3rem;
+}
+
+.text-8xl {
+  font-size: 4.25rem;
+}
+
+.text-10xl {
+  font-size: 5.25rem;
 }
 
 .italic {
@@ -16134,6 +16152,14 @@ body {
     font-size: 3rem;
   }
 
+  .sm\:text-8xl {
+    font-size: 4.25rem;
+  }
+
+  .sm\:text-10xl {
+    font-size: 5.25rem;
+  }
+
   .sm\:italic {
     font-style: italic;
   }
@@ -23916,6 +23942,14 @@ body {
 
   .md\:text-5xl {
     font-size: 3rem;
+  }
+
+  .md\:text-8xl {
+    font-size: 4.25rem;
+  }
+
+  .md\:text-10xl {
+    font-size: 5.25rem;
   }
 
   .md\:italic {
@@ -31702,6 +31736,14 @@ body {
     font-size: 3rem;
   }
 
+  .lg\:text-8xl {
+    font-size: 4.25rem;
+  }
+
+  .lg\:text-10xl {
+    font-size: 5.25rem;
+  }
+
   .lg\:italic {
     font-style: italic;
   }
@@ -39484,6 +39526,14 @@ body {
 
   .xl\:text-5xl {
     font-size: 3rem;
+  }
+
+  .xl\:text-8xl {
+    font-size: 4.25rem;
+  }
+
+  .xl\:text-10xl {
+    font-size: 5.25rem;
   }
 
   .xl\:italic {

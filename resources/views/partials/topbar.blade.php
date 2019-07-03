@@ -16,11 +16,11 @@
         <div class="flex items-center">
             @guest
             <div>
-                <a class="authentication-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                <a class="authentication-link" href="{{ route('login') }}">{{ __('Iniciar sesión') }}</a>
             </div>
             <div>
                 @if (Route::has('register'))
-                    <a class="authentication-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                    <a class="authentication-link" href="{{ route('register') }}">{{ __('Crear cuenta') }}</a>
                 @endif
             </div>
             @else

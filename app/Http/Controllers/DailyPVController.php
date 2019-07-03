@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Carbon\Carbon;
 use App\DailyPV;
 use App\Events\PvUpdated;
+use App\Events\FlashMessage;
 
 class DailyPVController extends Controller
 {
@@ -82,6 +83,7 @@ class DailyPVController extends Controller
     {
         $dailyPV->update($request->all());
         PvUpdated::dispatch($dailyPV);
+        FlashMessage::dispatch('success', 'PV data updated');
         return redirect('/dailyPV');
     }
 

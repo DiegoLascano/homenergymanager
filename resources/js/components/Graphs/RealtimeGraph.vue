@@ -1,19 +1,14 @@
 <template>
-  <div class="bg-white rounded-md shadow-md">
-      <div class="flex justify-between p-2 border-b border-grey-300 mb-2">
-          <div>
-            <label class="font-semibold text-xs tracking-xwide text-grey-600 ml-2">Consumo de energía </label>
-            <!-- <select v-model="day1" @change="reload">
-                <option v-for="n in 365">{{ n }}</option>
-            </select> -->
-          </div>
-          <div>
-            <label class="font-semibold text-xs tracking-xwide text-grey-600">{{ today }} </label>
-            <!-- <select v-model="day2" @change="reload">
-                <option v-for="n in 365">{{ n }}</option>
-            </select> -->
-          </div>
-      </div>
+  <div class="bg-white">
+        <div class="flex flex-col md:flex-row justify-between items-center p-2 border-b border-grey-300 mb-2">
+        <!-- <div class="flex justify-between p-2 border-b border-grey-300 mb-2"> -->
+            <div>
+                <label class="font-semibold text-xs tracking-xwide text-grey-600 ml-2">{{ title }}</label>
+            </div>
+            <div>
+                <label class="font-semibold text-xs tracking-xwide text-grey-600">{{ today }} </label>
+            </div>
+        </div>
     <line-chart :height="200" :chart-data="chartData" :options="chartOptions"></line-chart>
   </div>
 </template>
@@ -23,10 +18,9 @@
   export default {
     extends: LineGraphCompare,
 
-    // props: {
-    //     day1: { default: 1 },
-    //     day2: {default:50}
-    // },
+    props: {
+        title: '',
+    },
 
     data(){
         return{
@@ -89,6 +83,10 @@
                         gridLines: {
                             display: false,
                         },
+                        ticks: {
+                            // autoSkip: true,
+                            maxTicksLimit: 8,
+                        }
                     }]
                 },
                 tooltips: {

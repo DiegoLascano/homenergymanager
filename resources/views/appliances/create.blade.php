@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('sidebar')
-    {{-- @parent --}}
+    @parent
 @endsection
 
 @section('content')
@@ -12,7 +12,7 @@
         </aside> --}}
         <div class="md:flex items-center flex-1">
             <div class="form-box mx-auto my-3">
-                <p class="text-cyan-800 text-center text-md font-bold uppercase mb-4">Add Appliances</p>
+                <p class="text-cyan-800 text-center text-md font-bold uppercase mb-4">Nuevo Artefacto</p>
                 <form method="POST" action="/appliances">
                     @csrf
                     <div class="flex flex-wrap -mx-3 mb-6">
@@ -25,7 +25,7 @@
                         </div>
                         <div class="w-full md:w-1/2 px-3">
                             <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-last-name">
-                                Potencia [kWh]
+                                Potencia [kW]
                             </label>
                             <input name="power_kWh" class="input-box" id="grid-last-name" type="text" placeholder="1.2">
                         </div>
@@ -63,7 +63,7 @@
                         </div>
                         <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
                             <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-zip">
-                                duracion de ciclo [min]
+                                duracion [min]
                             </label>
                             <input name="length_operation" class="input-box" id="grid-zip" type="text" placeholder="30">
                         </div>
@@ -74,7 +74,7 @@
                             Aceptar
                         </button>
                         <a class="inline-block align-baseline font-bold text-sm text-cyan-600 hover:text-cyan-900 no-underline hover:underline" href="/appliances">
-                            Cancel
+                            Cancelar
                         </a>
                     </div>
                 </form>

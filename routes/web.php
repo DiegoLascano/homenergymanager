@@ -14,6 +14,7 @@ use App\Events\PvUpdated;
 use App\Events\FlashMessage;
 use App\Events\FlashMsg;
 use App\Events\FlaMsg;
+use App\Schedule as ScheduleModel;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,7 +44,14 @@ Route::get('/pvreal', function(){
 Route::get('/api/energyCost', 'FetchDataAPI@energyCost')->name('energyCost');
 Route::get('/api/pvSim', 'FetchDataAPI@pvSim')->name('pvSim');
 Route::get('/api/schedule', 'FetchDataAPI@schedule')->name('schedule');
-Route::get('/api/realtimeData', 'FetchDataAPI@realtimeData')->name('realtimeData');
+
+/**
+ * Routes for graphs
+ */
+Route::get('/api/realtimeCost', 'FetchDataAPI@realtimeCost')->name('realtimeCost');
+Route::get('/api/realtimeEnergy', 'FetchDataAPI@realtimeEnergy')->name('realtimeEnergy');
+Route::get('/api/realCostData', 'FetchDataAPI@realCostData')->name('realCostData');
+Route::get('/api/energyData', 'FetchDataAPI@energyData')->name('energyData');
 
 /**
  * Routes for small cards with daily values
@@ -55,13 +63,22 @@ Route::get('/api/realCost', 'FetchDataAPI@realCost')->name('realCost');
 Route::get('/api/grossCost', 'FetchDataAPI@grossCost')->name('grossCost');
 // Route::get('/api/historicalGrossCost', 'FetchDataAPI@historicalGrossCost')->name('historicalGrossCost');
 Route::get('/api/consumedEnergy', 'FetchDataAPI@consumedEnergy')->name('consumedEnergy');
-Route::get('/api/pvRealUsed', 'FetchDataAPI@pvRealUsed')->name('pvRealUsed');
+Route::get('/api/pvRealGenerated', 'FetchDataAPI@pvRealGenerated')->name('pvRealGenerated');
 Route::get('/api/pvSimUsed', 'FetchDataAPI@pvSimUsed')->name('pvSimUsed');
+Route::get('/api/costSavings', 'FetchDataAPI@costSavings')->name('costSavings');
+Route::get('/api/energySavings', 'FetchDataAPI@energySavings')->name('energySavings');
+
+Route::get('/api/pvSim', 'FetchDataAPI@pvSim')->name('pvSim');
+Route::get('/api/pvGenReal', 'FetchDataAPI@pvGenReal')->name('pvGenReal');
 
 Route::get('/ga', function() {
-    $title = 'success';
-    $message = 'New schedule generated successfully';
-    event(new FlashMessage($title, $message));
+    // $title = 'success';
+    // $message = 'New schedule generated successfully';
+    // event(new FlashMessage($title, $message));
+    $date = '2019-05-25';
+    $newDate = Carbon::parse($date)->toFormattedDateString();
+    // $newDate->setDateFrom($date);
+    dd($newDate);  
     return view('ga');
 })->name('ga');
 Route::get('/back', function () {

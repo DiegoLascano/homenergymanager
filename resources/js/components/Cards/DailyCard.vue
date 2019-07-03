@@ -1,5 +1,5 @@
 <template>
-    <div class="h-24 flex bg-white rounded-md shadow-md">
+    <div class="h-24 flex bg-white rounded-md">
         <div class="w-1/4 text-xs m-auto text-center">
             <svg-icon :icon="icon" class="icon-36 -my-1"></svg-icon>
         </div>
@@ -36,12 +36,12 @@ export default {
     data() {
         return {
             title: 'no title',
-            value: '0.0',
+            value: 'No data',
             unit: '',
             badge: {
                 backgroundColor: 'bg-cyan-100',
                 textColor: 'text-cyan-600',
-                value: '+2.56 %',
+                value: 'No data',
             }
         }
     },

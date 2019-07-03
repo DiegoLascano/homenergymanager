@@ -61,10 +61,10 @@ class SchedulesController extends Controller
         $schedule = auth()->user()->schedules()->create($attributes);
         // dump($attributes);
         // dd($schedule);
-        event(new FlashMessage('info', 'A new Schedule is being generated'));
+        event(new FlashMessage('info', 'Se está generando un nuevo cronograma'));
         event(new ScheduleRequested($schedule));
 
-        return redirect()->back()->with('message', 'Schedule is being generated');
+        return redirect()->back()->with('message', 'Se está generando un nuevo cronograma');
     }
 
     /**

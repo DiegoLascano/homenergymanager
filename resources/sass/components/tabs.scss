@@ -1,9 +1,9 @@
 .tab-name{
-    @apply  p-4 text-sm uppercase tracking-xwide border-b
+    @apply p-2 text-xs uppercase tracking-xwide border-b
 }
 @screen md{
     .tab-name{
-        @apply  flex-1 text-center
+        @apply p-4 flex-1 text-center text-sm
     }
 }
 
